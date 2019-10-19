@@ -8,9 +8,7 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
-import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
+import wxRouter from './modules/wx'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -79,32 +77,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/documentation',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/documentation/index'),
-        name: 'Documentation',
-        meta: { title: 'Documentation', icon: 'documentation', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/guide',
-    component: Layout,
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'Guide',
-        meta: { title: 'Guide', icon: 'guide', noCache: true }
+        meta: { title: '主页', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -118,7 +91,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
-        meta: { title: 'Profile', icon: 'user', noCache: true }
+        meta: { title: '个人信息', icon: 'user', noCache: true }
       }
     ]
   }
@@ -136,17 +109,17 @@ export const asyncRoutes = [
     alwaysShow: true, // will always show the root menu
     name: 'Permission',
     meta: {
-      title: 'Permission',
+      title: '权限',
       icon: 'lock',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
       {
-        path: 'page',
+        path: 'pagepermisson',
         component: () => import('@/views/permission/page'),
         name: 'PagePermission',
         meta: {
-          title: 'Page Permission',
+          title: '页面权限',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -164,39 +137,589 @@ export const asyncRoutes = [
         component: () => import('@/views/permission/role'),
         name: 'RolePermission',
         meta: {
-          title: 'Role Permission',
+          title: '角色权限',
+          roles: ['admin']
+        }
+      }
+    ]
+  },
+  {
+    path: '/order',
+    component: Layout,
+    redirect: '/order/export-excel',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission2',
+    meta: {
+      title: '订单管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'oselect',
+        component: () => import('@/views/order/query'),
+        name: 'PagePermission',
+        meta: {
+          title: '订单查询[查询..]',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'overify',
+        component: () => import('@/views/order/verify'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '订单验证'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'reverify',
+        component: () => import('@/views/order/reverify'),
+        name: 'RolePermission',
+        meta: {
+          title: '订单撤改',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'ordertotal',
+        component: () => import('@/views/order/ordertotal'),
+        name: 'RolePermission',
+        meta: {
+          title: '订单总览',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'reorder',
+        component: () => import('@/views/other/index'),
+        name: 'RolePermission',
+        meta: {
+          title: '订单退款',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'orderquery',
+        component: () => import('@/views/other/index'),
+        name: 'RolePermission',
+        meta: {
+          title: '交易查询',
+          roles: ['admin']
+        }
+      }
+    ]
+  },
+  {
+    path: '/permission3',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission3',
+    meta: {
+      title: '产品管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'productsadd',
+        component: () => import('@/views/product/customer-buy'),
+        name: 'PagePermission',
+        meta: {
+          title: '消费者产品预订[界面初步完成]',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'productselect',
+        component: () => import('@/views/product/supply-buy'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '供应商产品预订[界面初步完成]'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'productadd',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '产品添加[实物虚物 基本 票付通 联合票 区域产品]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'productsearch',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '产品查询[可修改删除]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'productverify',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '单项目验证',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'productsadd2',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '单项目新增',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'productssearch',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '单项目查询 修改删除',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'lsadd',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '零食售卖[水 饮料 小吃 泡面 水果]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'lssearch',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '零食查询 新增',
+          roles: ['admin']
+        }
+      }
+    ]
+  },
+  {
+    path: '/permission4',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission4',
+    meta: {
+      title: '团队管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'groupapply',
+        component: () => import('@/views/other/group'),
+        name: 'PagePermission',
+        meta: {
+          title: '申请团队',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'groupquery',
+        component: () => import('@/views/other/groupquery'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '团队查询[消费者]'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'groupselect',
+        component: () => import('@/views/other/groupquery2'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '团队查询[供应商]'
+          // if do not set roles, means: this page does not require permission
+        }
+      }
+    ]
+  },
+  {
+    path: '/logman',
+    component: Layout,
+    redirect: '/logman/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission7',
+    meta: {
+      title: '日志管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'orderlog',
+        component: () => import('@/views/log/orderlog'),
+        name: 'PagePermission',
+        meta: {
+          title: '订单日志',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'cashlog',
+        component: () => import('@/views/log/cashlog'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '提现日志[初步完成]'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'dealid',
+        component: () => import('@/views/log/deallog'),
+        name: 'RolePermission',
+        meta: {
+          title: '交易日志[初步完成]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'apilog',
+        component: () => import('@/views/log/apilog'),
+        name: 'RolePermission',
+        meta: {
+          title: '接口操作记录',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'syslog',
+        component: () => import('@/views/log/syslog'),
+        name: 'RolePermission',
+        meta: {
+          title: '系统日志[初步完成]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'refundlog',
+        component: () => import('@/views/log/refundlog'),
+        name: 'RolePermission',
+        meta: {
+          title: '退款日志[初步完成]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'verifylog',
+        component: () => import('@/views/log/verifylog'),
+        name: 'RolePermission',
+        meta: {
+          title: '验证日志[初步完成]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'expresslog',
+        component: () => import('@/views/log/expresslog'),
+        name: 'RolePermission',
+        meta: {
+          title: '快递记录[初步完成]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'sendlog',
+        component: () => import('@/views/log/sendlog'),
+        name: 'RolePermission',
+        meta: {
+          title: '发送记录',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'lqlog',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '积分零钱记录',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'reorderlog',
+        component: () => import('@/views/log/reorderlog'),
+        name: 'RolePermission',
+        meta: {
+          title: '订单撤改记录',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'simchargelog',
+        component: () => import('@/views/log/simchargelog'),
+        name: 'RolePermission',
+        meta: {
+          title: 'SIM充值记录[初步完成]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'wxlog',
+        component: () => import('@/views/log/wxlog'),
+        name: 'RolePermission',
+        meta: {
+          title: '微信操作记录',
+          roles: ['admin']
+        }
+      }
+    ]
+  },
+  {
+    path: '/systemconfig',
+    component: Layout,
+    redirect: '/systemconfig/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission10',
+    meta: {
+      title: '系统管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'backup',
+        component: () => import('@/views/system/backup'),
+        name: 'PagePermission',
+        meta: {
+          title: '备份/恢复',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'feedback',
+        component: () => import('@/views/system/feeback'),
+        name: 'RolePermission',
+        meta: {
+          title: '意见反馈处理',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'base22',
+        component: () => import('@/views/system/baseinfo'),
+        name: 'RolePermission',
+        meta: {
+          title: '基本信息管理 直播配置',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'role4',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '基本信息:邮费配置、支付配置',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'role5',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '客服管理:客服聊天',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'role6',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '员工管理:兑票员 重置登录 交易密码',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'role7',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '部门管理管理:检票部 财务。。 检票限制 购票限制',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'role8',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '配置 供应商状态:如下雨 部分设施关闭..',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'role12',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '代理商\代理商资质审核',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'role12',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '广告管理',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'role13',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '客服聊天',
+          roles: ['admin']
+        }
+      }
+    ]
+  },
+  {
+    path: '/permission16',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission16',
+    meta: {
+      title: '活动产品管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'bargain-add',
+        component: () => import('@/views/product/bargain-add'),
+        name: 'PagePermission',
+        meta: {
+          title: '砍价产品',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'integral-add',
+        component: () => import('@/views/product/integral-add'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '积分产品'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'ptadd',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: '拼团产品',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'msadd',
+        component: () => import('@/views/product/seckill-add'),
+        name: 'RolePermission',
+        meta: {
+          title: '限时产品-可秒杀',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'yhjadd',
+        component: () => import('@/views/product/coupon-add'),
+        name: 'RolePermission',
+        meta: {
+          title: '优惠券:发放 查询',
+          roles: ['admin']
+        }
+      }
+    ]
+  },
+  {
+    path: '/finance',
+    component: Layout,
+    redirect: '/finance/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'finance',
+    meta: {
+      title: '财务管理',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'query',
+        component: () => import('@/views/finance/verify'),
+        name: 'PagePermission',
+        meta: {
+          title: '查看对账单',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'reverify',
+        component: () => import('@/views/finance/reverify'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '付款记录'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'query3',
+        component: () => import('@/views/finance/verify'),
+        name: 'RolePermission',
+        meta: {
+          title: '发票管理',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'query4',
+        component: () => import('@/views/finance/verify'),
+        name: 'RolePermission',
+        meta: {
+          title: '保证金账户',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'query5',
+        component: () => import('@/views/finance/verify'),
+        name: 'RolePermission',
+        meta: {
+          title: '资金转账',
           roles: ['admin']
         }
       }
     ]
   },
 
-  {
-    path: '/icon',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/icons/index'),
-        name: 'Icons',
-        meta: { title: 'Icons', icon: 'icon', noCache: true }
-      }
-    ]
-  },
-
   /** when your routing map is too long, you can split it into small modules **/
   componentsRouter,
-  chartsRouter,
-  nestedRouter,
-  tableRouter,
-
+  wxRouter,
   {
     path: '/example',
     component: Layout,
     redirect: '/example/list',
     name: 'Example',
     meta: {
-      title: 'Example',
+      title: '例子',
       icon: 'example'
     },
     children: [
@@ -218,171 +741,88 @@ export const asyncRoutes = [
         component: () => import('@/views/example/list'),
         name: 'ArticleList',
         meta: { title: 'Article List', icon: 'list' }
-      }
-    ]
-  },
-
-  {
-    path: '/tab',
-    component: Layout,
-    children: [
+      },
       {
-        path: 'index',
+        path: 'icon',
+        component: () => import('@/views/icons/index'),
+        name: 'ArticleList2',
+        meta: { title: '图标', icon: 'icon' }
+      },
+      {
+        path: 'tag',
         component: () => import('@/views/tab/index'),
-        name: 'Tab',
-        meta: { title: 'Tab', icon: 'tab' }
-      }
-    ]
-  },
-
-  {
-    path: '/error',
-    component: Layout,
-    redirect: 'noRedirect',
-    name: 'ErrorPages',
-    meta: {
-      title: 'Error Pages',
-      icon: '404'
-    },
-    children: [
+        name: 'ArticleList2',
+        meta: { title: '标签', icon: 'tab' }
+      },
+      {
+        path: 'guide',
+        component: () => import('@/views/tab/index'),
+        name: 'ArticleList2',
+        meta: { title: '向导', icon: 'guide' }
+      },
+      {
+        path: 'pdf',
+        component: () => import('@/views/pdf/index'),
+        name: 'pdf',
+        meta: { title: 'PDF', icon: 'pdf' }
+      },
+      {
+        path: 'theme',
+        component: () => import('@/views/other/theme'),
+        name: 'theme',
+        meta: { title: 'theme', icon: 'theme' }
+      },
+      {
+        path: 'clipboard',
+        component: () => import('@/views/clipboard/index'),
+        name: 'clipboard',
+        meta: { title: 'clipboard', icon: 'clipboard' }
+      },
+      {
+        path: 'zip',
+        component: () => import('@/views/other/zip'),
+        name: 'clipboard',
+        meta: { title: 'zip', icon: 'zip' }
+      },
+      {
+        path: 'realname',
+        component: () => import('@/views/other/zip'),
+        name: 'clipboard',
+        meta: { title: '用户实名认证', icon: 'zip' }
+      },
       {
         path: '401',
         component: () => import('@/views/error-page/401'),
-        name: 'Page401',
-        meta: { title: '401', noCache: true }
+        name: 'clipboard',
+        meta: { title: '401', icon: 'zip' }
       },
       {
         path: '404',
         component: () => import('@/views/error-page/404'),
-        name: 'Page404',
-        meta: { title: '404', noCache: true }
-      }
-    ]
-  },
-
-  {
-    path: '/error-log',
-    component: Layout,
-    children: [
-      {
-        path: 'log',
-        component: () => import('@/views/error-log/index'),
-        name: 'ErrorLog',
-        meta: { title: 'Error Log', icon: 'bug' }
-      }
-    ]
-  },
-
-  {
-    path: '/excel',
-    component: Layout,
-    redirect: '/excel/export-excel',
-    name: 'Excel',
-    meta: {
-      title: 'Excel',
-      icon: 'excel'
-    },
-    children: [
-      {
-        path: 'export-excel',
-        component: () => import('@/views/excel/export-excel'),
-        name: 'ExportExcel',
-        meta: { title: 'Export Excel' }
+        name: 'clipboard',
+        meta: { title: '404', icon: 'zip' }
       },
       {
         path: 'export-selected-excel',
         component: () => import('@/views/excel/select-excel'),
         name: 'SelectExcel',
-        meta: { title: 'Export Selected' }
-      },
-      {
-        path: 'export-merge-header',
-        component: () => import('@/views/excel/merge-header'),
-        name: 'MergeHeader',
-        meta: { title: 'Merge Header' }
+        meta: { title: 'SelectExcel', icon: 'zip' }
       },
       {
         path: 'upload-excel',
         component: () => import('@/views/excel/upload-excel'),
         name: 'UploadExcel',
-        meta: { title: 'Upload Excel' }
-      }
-    ]
-  },
-
-  {
-    path: '/zip',
-    component: Layout,
-    redirect: '/zip/download',
-    alwaysShow: true,
-    name: 'Zip',
-    meta: { title: 'Zip', icon: 'zip' },
-    children: [
+        meta: { title: 'UploadExcel', icon: 'zip' }
+      },
       {
-        path: 'download',
-        component: () => import('@/views/zip/index'),
-        name: 'ExportZip',
-        meta: { title: 'Export Zip' }
+        path: '/pdf/download',
+        component: () => import('@/views/pdf/download'),
+        name: 'download',
+        meta: { title: '404', icon: 'zip' },
+        hidden: true
       }
     ]
   },
-
-  {
-    path: '/pdf',
-    component: Layout,
-    redirect: '/pdf/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/pdf/index'),
-        name: 'PDF',
-        meta: { title: 'PDF', icon: 'pdf' }
-      }
-    ]
-  },
-  {
-    path: '/pdf/download',
-    component: () => import('@/views/pdf/download'),
-    hidden: true
-  },
-
-  {
-    path: '/theme',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/theme/index'),
-        name: 'Theme',
-        meta: { title: 'Theme', icon: 'theme' }
-      }
-    ]
-  },
-
-  {
-    path: '/clipboard',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/clipboard/index'),
-        name: 'ClipboardDemo',
-        meta: { title: 'Clipboard', icon: 'clipboard' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://github.com/PanJiaChen/vue-element-admin',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
@@ -400,5 +840,4 @@ export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
-
 export default router

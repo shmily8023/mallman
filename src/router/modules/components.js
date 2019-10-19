@@ -25,12 +25,6 @@ const componentsRouter = {
       meta: { title: 'Markdown' }
     },
     {
-      path: 'json-editor',
-      component: () => import('@/views/components-demo/json-editor'),
-      name: 'JsonEditorDemo',
-      meta: { title: 'JSON Editor' }
-    },
-    {
       path: 'split-pane',
       component: () => import('@/views/components-demo/split-pane'),
       name: 'SplitpaneDemo',
@@ -89,6 +83,12 @@ const componentsRouter = {
       component: () => import('@/views/components-demo/dnd-list'),
       name: 'DndListDemo',
       meta: { title: 'Dnd List' }
+    },
+    {
+      path: 'charts',
+      component: () => import('@/views/charts/line'),
+      name: 'KeyboardChart',
+      meta: { title: 'KeyboardChart' }
     },
     {
       path: 'drag-kanban',

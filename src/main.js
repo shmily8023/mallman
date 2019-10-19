@@ -1,5 +1,4 @@
 import Vue from 'vue'
-
 import Cookies from 'js-cookie'
 
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
@@ -16,7 +15,8 @@ import router from './router'
 import './icons' // icon
 import './permission' // permission control
 import './utils/error-log' // error log
-
+import http from './utils/http'
+Vue.prototype.$http = http
 import * as filters from './filters' // global filters
 
 /**
