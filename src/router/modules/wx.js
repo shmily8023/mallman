@@ -95,13 +95,7 @@ const nestedRouter = {
           path: 'menu1-11f',
           component: () => import('@/views/charts/keyboard'),
           name: 'Menu1-11f',
-          meta: { title: '标签管理' }
-        },
-        {
-          path: 'menu1-111g',
-          component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-12g',
-          meta: { title: '分组管理' }
+          meta: { title: '标签与分组' }
         },
         {
           path: 'menu1-111h',

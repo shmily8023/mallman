@@ -3,9 +3,11 @@
 
     <div>
       <FilenameOption v-model="filename" />
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">
-        Export Excel
-      </el-button>
+      <el-select v-model="namef" placeholder="验证类型">
+        <el-option label="普通订单" value="group" />
+        <el-option label="单项目订单" value="pt" />
+      </el-select>
+      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">Export Excel</el-button>
       <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;">
         <el-tag type="info">Documentation</el-tag>
       </a>
@@ -80,7 +82,8 @@ export default {
       downloadLoading: false,
       filename: '',
       autoWidth: true,
-      bookType: 'xlsx'
+      bookType: 'xlsx',
+      namef: ''
     }
   },
   created() {

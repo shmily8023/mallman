@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Cookies from 'js-cookie'
-
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
 import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 
 import Element from 'element-ui'
@@ -35,6 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
 })
+Vue.use(Antd)
 
 // register global utility filters
 Object.keys(filters).forEach(key => {

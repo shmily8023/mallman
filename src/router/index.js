@@ -7,7 +7,6 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
 import wxRouter from './modules/wx'
 
 /**
@@ -50,12 +49,17 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/login/index'),
+    component: () => import('@/views/system/login'),
+    hidden: true
+  },
+  {
+    path: '/apply',
+    component: () => import('@/views/system/apply'),
     hidden: true
   },
   {
     path: '/auth-redirect',
-    component: () => import('@/views/login/auth-redirect'),
+    component: () => import('@/views/system/auth-redirect'),
     hidden: true
   },
   {
@@ -224,29 +228,38 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'productsadd',
-        component: () => import('@/views/product/customer-buy'),
+        path: 'productsadd2',
+        component: () => import('@/views/product/order-buy'),
         name: 'PagePermission',
         meta: {
-          title: '消费者产品预订[界面初步完成]',
+          title: '产品预订',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
       {
-        path: 'productselect',
-        component: () => import('@/views/product/supply-buy'),
-        name: 'DirectivePermission',
+        path: 'productadd',
+        component: () => import('@/views/product/test'),
+        name: 'RolePermission',
         meta: {
-          title: '供应商产品预订[界面初步完成]'
-          // if do not set roles, means: this page does not require permission
+          title: '产品添加',
+          roles: ['admin']
         }
       },
       {
-        path: 'productadd',
-        component: () => import('@/views/permission/role'),
+        path: 'productcomment',
+        component: () => import('@/views/product/test'),
         name: 'RolePermission',
         meta: {
-          title: '产品添加[实物虚物 基本 票付通 联合票 区域产品]',
+          title: '产品评论管理',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'productcatalog',
+        component: () => import('@/views/product/productcatalog'),
+        name: 'RolePermission',
+        meta: {
+          title: '产品分类/属性 管理',
           roles: ['admin']
         }
       },
@@ -260,47 +273,11 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'productverify',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: '单项目验证',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'productsadd2',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: '单项目新增',
-          roles: ['admin']
-        }
-      },
-      {
         path: 'productssearch',
-        component: () => import('@/views/permission/role'),
+        component: () => import('@/views/product/simpleproduct'),
         name: 'RolePermission',
         meta: {
-          title: '单项目查询 修改删除',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'lsadd',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: '零食售卖[水 饮料 小吃 泡面 水果]',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'lssearch',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: '零食查询 新增',
+          title: '单项目管理[部分完成]',
           roles: ['admin']
         }
       }
@@ -391,7 +368,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/apilog'),
         name: 'RolePermission',
         meta: {
-          title: '接口操作记录',
+          title: '接口操作记录[初步完成]',
           roles: ['admin']
         }
       },
@@ -468,6 +445,15 @@ export const asyncRoutes = [
         }
       },
       {
+        path: 'simchargelog',
+        component: () => import('@/views/log/simchargelog'),
+        name: 'RolePermission',
+        meta: {
+          title: '计划任务记录',
+          roles: ['admin']
+        }
+      },
+      {
         path: 'wxlog',
         component: () => import('@/views/log/wxlog'),
         name: 'RolePermission',
@@ -513,34 +499,43 @@ export const asyncRoutes = [
         component: () => import('@/views/system/baseinfo'),
         name: 'RolePermission',
         meta: {
-          title: '基本信息管理 直播配置',
+          title: '基本信息管理',
           roles: ['admin']
         }
       },
       {
-        path: 'role4',
-        component: () => import('@/views/permission/role'),
+        path: 'sysconfig',
+        component: () => import('@/views/system/sysconfig'),
         name: 'RolePermission',
         meta: {
-          title: '基本信息:邮费配置、支付配置',
+          title: '系统配置',
           roles: ['admin']
         }
       },
       {
-        path: 'role5',
-        component: () => import('@/views/permission/role'),
+        path: 'sysconfig-supply',
+        component: () => import('@/views/system/sysconfig-supply'),
         name: 'RolePermission',
         meta: {
-          title: '客服管理:客服聊天',
+          title: '供应商配置',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'sysconfig-subman',
+        component: () => import('@/views/system/sysconfig-subman'),
+        name: 'RolePermission',
+        meta: {
+          title: '代理商配置',
           roles: ['admin']
         }
       },
       {
         path: 'role6',
-        component: () => import('@/views/permission/role'),
+        component: () => import('@/views/system/userconfig'),
         name: 'RolePermission',
         meta: {
-          title: '员工管理:兑票员 重置登录 交易密码',
+          title: '员工管理',
           roles: ['admin']
         }
       },
@@ -554,15 +549,6 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'role8',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: '配置 供应商状态:如下雨 部分设施关闭..',
-          roles: ['admin']
-        }
-      },
-      {
         path: 'role12',
         component: () => import('@/views/permission/role'),
         name: 'RolePermission',
@@ -572,79 +558,11 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'role12',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: '广告管理',
-          roles: ['admin']
-        }
-      },
-      {
         path: 'role13',
         component: () => import('@/views/permission/role'),
         name: 'RolePermission',
         meta: {
           title: '客服聊天',
-          roles: ['admin']
-        }
-      }
-    ]
-  },
-  {
-    path: '/permission16',
-    component: Layout,
-    redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
-    name: 'Permission16',
-    meta: {
-      title: '活动产品管理',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'bargain-add',
-        component: () => import('@/views/product/bargain-add'),
-        name: 'PagePermission',
-        meta: {
-          title: '砍价产品',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: 'integral-add',
-        component: () => import('@/views/product/integral-add'),
-        name: 'DirectivePermission',
-        meta: {
-          title: '积分产品'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
-      {
-        path: 'ptadd',
-        component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: '拼团产品',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'msadd',
-        component: () => import('@/views/product/seckill-add'),
-        name: 'RolePermission',
-        meta: {
-          title: '限时产品-可秒杀',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'yhjadd',
-        component: () => import('@/views/product/coupon-add'),
-        name: 'RolePermission',
-        meta: {
-          title: '优惠券:发放 查询',
           roles: ['admin']
         }
       }
@@ -711,7 +629,6 @@ export const asyncRoutes = [
   },
 
   /** when your routing map is too long, you can split it into small modules **/
-  componentsRouter,
   wxRouter,
   {
     path: '/example',
@@ -749,12 +666,6 @@ export const asyncRoutes = [
         meta: { title: '图标', icon: 'icon' }
       },
       {
-        path: 'tag',
-        component: () => import('@/views/tab/index'),
-        name: 'ArticleList2',
-        meta: { title: '标签', icon: 'tab' }
-      },
-      {
         path: 'guide',
         component: () => import('@/views/tab/index'),
         name: 'ArticleList2',
@@ -779,14 +690,8 @@ export const asyncRoutes = [
         meta: { title: 'clipboard', icon: 'clipboard' }
       },
       {
-        path: 'zip',
-        component: () => import('@/views/other/zip'),
-        name: 'clipboard',
-        meta: { title: 'zip', icon: 'zip' }
-      },
-      {
         path: 'realname',
-        component: () => import('@/views/other/zip'),
+        component: () => import('@/views/clipboard/index'),
         name: 'clipboard',
         meta: { title: '用户实名认证', icon: 'zip' }
       },

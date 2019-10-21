@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <span>普通消费者查询:自己下过的单。 代理商 查询代理商下管理的供应商所有订单。 供应商查询 查看供应商下消费者订单 12306汇总？</span>
+    <span>普通消费者查询:自己下过的单。 代理商 查询代理商下管理的供应商所有订单。 供应商查询 查看供应商下消费者订单 12301汇总？ 查询出入明细</span>
     <div>
       <!--<AutoWidthOption v-model="autoWidth" />-->
       <!--<BookTypeOption v-model="bookType" />-->

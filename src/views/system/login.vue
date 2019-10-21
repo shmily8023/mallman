@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">系统登录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -45,31 +45,119 @@
         </el-form-item>
       </el-tooltip>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
 
       <div style="position:relative">
         <div class="tips">
-          <span>Username : admin</span>
-          <span>Password : any</span>
+          <span>忘记用户名/忘记密码</span>
+          <span>密码 : any</span>
         </div>
         <div class="tips">
-          <span style="margin-right:18px;">Username : editor</span>
-          <span>Password : any</span>
+          <el-button class="thirdparty-button" type="primary" @click="showDialog=true">其他方式登录</el-button>
         </div>
-
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-          Or connect with
-        </el-button>
+      </div>
+      <br>
+      <div style="position:relative">
+        <div class="tips">
+          <el-button class="thirdparty-button" type="primary"><router-link to="/apply">商务合作申请2</router-link></el-button>
+        </div>
       </div>
     </el-form>
 
-    <el-dialog title="Or connect with" :visible.sync="showDialog">
+    <el-dialog title="其他方式登录" :visible.sync="showDialog">
       Can not be simulated on local, so please combine you own business simulation! ! !
       <br>
       <br>
       <br>
       <social-sign />
     </el-dialog>
+    <el-card class="box-card" width="100%" :style="styleObj1" @closed="handleClose2">
+      <el-tabs :before-leave="moreState">
+        <el-tab-pane label="区域代理商申请">
+          <div style="display:inline-block;">
+            <hr>
+            <el-button @click="addData()">增加数据</el-button>
+            <div style="display:inline-block; width: 1500px">
+              <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
+                <el-table-column prop="address" label="分类名称" width="400" show-overflow-tooltip />
+                <el-table-column label="操作" width="400" show-overflow-tooltip>
+                  <template slot-scope="scope">
+                    <el-button type="primary" @click="dialogFormVisible = true">编辑</el-button>
+                    <el-button type="danger" @click.native="delS(scope.row)">删除</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+              <el-dialog title="编辑签到配置" :visible.sync="dialogFormVisible" @closed="handleClose">
+                <el-form ref="ruleForm" :model="form" :rules="rules">
+                  <template>
+                    <el-form-item label="签到天数" :label-width="formLabelWidth" prop="name">
+                      <el-input>(scope.row.date)</el-input>
+                    </el-form-item>
+                    <el-form-item label="签到值" :label-width="formLabelWidth">
+                      <el-input>(scope.row.name)</el-input>
+                    </el-form-item>
+                  </template>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                  <el-button @click="dialogFormVisible = false">取 消</el-button>
+                  <el-button type="primary" @click="handleSave">确 定</el-button>
+                </div>
+              </el-dialog>
+            </div>
+            <div style="margin-top: 20px">
+              <!--<el-button @click="delMulData()">批量删除</el-button>-->
+              <!--<el-button @click="prints()">打印</el-button>-->
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="供应商申请">
+          <div style="display:inline-block;">
+            <div style="display:inline-block;">
+              <label class="lxqdn" style="padding-left:0;">产品分类:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <el-input v-model="lxqdn" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
+              <el-button type="primary">查询</el-button>
+              <el-button @click="addData()">增加数据</el-button>
+            </div>
+            <br><br>
+            <hr>
+            <div style="display:inline-block; width: 1500px">
+              <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
+                <el-table-column prop="name" label="签到天数" width="120" />
+                <el-table-column prop="address" label="签到值" width="400" show-overflow-tooltip />
+                <el-table-column label="操作" width="400" show-overflow-tooltip>
+                  <template slot-scope="scope">
+                    <el-button type="primary" @click="dialogFormVisible = true">编辑</el-button>
+                    <el-button type="danger" @click.native="delS(scope.row)">删除</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+              <el-dialog title="编辑签到配置" :visible.sync="dialogFormVisible" @closed="handleClose">
+                <el-form ref="ruleForm" :model="form" :rules="rules">
+                  <template>
+                    <el-form-item label="签到天数" :label-width="formLabelWidth" prop="name">
+                      <el-input>(scope.row.date)</el-input>
+                    </el-form-item>
+                    <el-form-item label="签到值" :label-width="formLabelWidth">
+                      <el-input>(scope.row.name)</el-input>
+                    </el-form-item>
+                  </template>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                  <el-button @click="dialogFormVisible = false">取 消</el-button>
+                  <el-button type="primary" @click="handleSave">确 定</el-button>
+                </div>
+              </el-dialog>
+            </div>
+            <div style="margin-top: 20px">
+              <!--<el-button @click="delMulData()">批量删除</el-button>-->
+              <!--<el-button @click="prints()">打印</el-button>-->
+            </div>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
+    </el-card>
   </div>
 </template>
 
@@ -96,6 +184,8 @@ export default {
       }
     }
     return {
+      openTab: false,
+      displaya: 'none',
       loginForm: {
         username: 'admin',
         password: '111111'
@@ -185,6 +275,10 @@ export default {
         }
         return acc
       }, {})
+    },
+    getOtherQuery2() {
+      // alert('111')
+      // this.$refs.tabs.$children[0].$el.style.display = 'none'
     }
     // afterQRScan() {
     //   if (e.key === 'x-admin-oauth-code') {
@@ -252,6 +346,9 @@ $cursor: #fff;
     border-radius: 5px;
     color: #454545;
   }
+}
+.applyform{
+display:none;
 }
 </style>
 

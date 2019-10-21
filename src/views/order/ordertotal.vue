@@ -2,6 +2,8 @@
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
       <span>分销商数 待审核分销商数 已支出佣金 待提现佣金笔数 出售中的商品数 仓库中商品数  已售磬的商品数 待付款订单数 待退/换货订单数 已完成订单数</span>
+      <br>
+      <span>分析:那个地方买的多 通过手机app 公众号 小程序多 什么时间下单多</span>
       <el-tab-pane label="订单总览[供应商/代理商/消费者切换]">
         <div class="dashboard-editor-container">
           <el-row :gutter="40" class="panel-group">

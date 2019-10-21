@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
-      <el-tab-pane label="教师信息">
+      <el-tab-pane label="基本配置">
         <div style="display:inline-block;">
           <label class="radio-label" style="padding-left:0;">网站开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-radio-group v-for="item in tabs" :key="item.id" v-model="tabPosition" @click="toggleTab(item.id)">
@@ -10,49 +10,59 @@
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="webname" style="padding-left:0;">姓名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="webname" style="padding-left:0;">网站名称:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="webname" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <div style="display:inline-block;">
-          <label class="sitecontent" style="padding-left:0;">性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="sitecontent" style="padding-left:0;">站点描述:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="sitecontent" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">出生日期:&nbsp;&nbsp;&nbsp;</label>
+          <label class="bah" style="padding-left:0;">网站备案号:&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="bah" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">民族:&nbsp;&nbsp;&nbsp;</label>
+          <label class="bah" style="padding-left:0;">公司地址:&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="bah" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">资质许可-种类:&nbsp;&nbsp;&nbsp;</label>
+          <label class="bah" style="padding-left:0;">联系电话:&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="lxdh" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">任教学科:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="bah" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
+          <label class="radio-label" style="padding-left:0;">资源存储地址:</label>
+          <el-select v-model="sizeForm" placeholder="存储地址">
+            <el-option label="本地存储" value="jiedai" />
+            <el-option label="阿里云存储OSS" value="shichang" />
+            <el-option label="腾讯云COS" value="qita" />
+            <el-option label="七牛云存储" value="none" />
+          </el-select>
+        </div>
+        <br><br>
+        <hr>
+        <div style="display:inline-block;">
+          <label class="xffx" style="padding-left:0;">消费返现:&nbsp;&nbsp;&nbsp;</label>
+          <el-input v-model="xffx" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
+        </div>
+        <br><br>
+        <div style="display:inline-block;">
+          <label class="zkbl" style="padding-left:0;">抵扣比例:&nbsp;&nbsp;&nbsp;</label>
+          <el-input v-model="zkbl" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
+        </div>
+        <hr>
+        <label class="radio-label" style="padding-left:0;">内部通知/首页通知: </label><br>
+        <div style="display:inline-block;">
+          <label class="zkbl" style="padding-left:0;">首页通知内容:&nbsp;&nbsp;&nbsp;</label>
+          <el-input v-model="zkbl" placeholder="首页通知内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">资质证件号码:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="lxdh" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">身份证号码:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="bah" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">手机号:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="lxdh" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">发证时间:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="lxdh" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
+          <label class="zkbl" style="padding-left:0;">内部通知内容:&nbsp;&nbsp;&nbsp;</label>
+          <el-input v-model="zkbl" placeholder="内部通知内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="学生信息">
+      <el-tab-pane label="积分">
         <div style="display:inline-block;">
           <label class="switchRoles2" style="padding-left:0;">积分开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-radio-group v-model="switchRoles2">
@@ -61,34 +71,15 @@
           </el-radio-group>
           <br><br>
           <div style="display:inline-block;">
-            <label class="lxqdn" style="padding-left:0;">姓名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label class="lxqdn" style="padding-left:0;">连续签到几天:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <el-input v-model="lxqdn" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
           </div>
           <br><br>
           <div style="display:inline-block;">
-            <label class="lxqdv" style="padding-left:0;">学号:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label class="lxqdv" style="padding-left:0;">连续签到奖励:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <el-input v-model="lxqdv" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
           </div>
           <br><br>
-          <div style="display:inline-block;">
-            <label class="lxqdn" style="padding-left:0;">专业:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdn" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <br><br>
-          <div style="display:inline-block;">
-            <label class="lxqdv" style="padding-left:0;">身份证号码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdv" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <br><br>
-          <div style="display:inline-block;">
-            <label class="lxqdn" style="padding-left:0;">有效期:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdn" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <br><br>
-          <div style="display:inline-block;">
-            <label class="lxqdv" style="padding-left:0;">手机号:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdv" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
           <hr>
           <el-button @click="addData()">增加数据</el-button>
           <div style="display:inline-block; width: 1500px">
@@ -126,7 +117,7 @@
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="导游">
+      <el-tab-pane label="三级配置">
         <label class="radio-label" style="padding-left:0;">三级总和不得超过100:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <br><br>
         <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -136,37 +127,22 @@
         </el-radio-group>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level1" style="padding-left:0;">导游姓名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level1" style="padding-left:0;">第一级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level1" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level2" style="padding-left:0;">语种:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level2" style="padding-left:0;">第二级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level2" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">所在机构:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">身份证:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">手机号:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">有效期:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level3" style="padding-left:0;">第三级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="SIM卡">
-        <label class="radio-label" style="padding-left:0;">新增 修改 删除--充值:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <el-tab-pane label="广告管理">
+        <label class="radio-label" style="padding-left:0;">三级总和不得超过100:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <br><br>
         <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <el-radio-group v-model="switchRoles">
@@ -175,28 +151,22 @@
         </el-radio-group>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level1" style="padding-left:0;">ICCID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level1" style="padding-left:0;">第一级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level1" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level2" style="padding-left:0;">手机号:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level2" style="padding-left:0;">第二级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level2" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">套餐:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">启用状态:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level3" style="padding-left:0;">第三级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="设备信息表">
-        <label class="radio-label" style="padding-left:0;">[新增 修改 删除 更新绑定关系]:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <br><br>
-        <label class="radio-label" style="padding-left:0;">编辑所属供应商 执行安装设备:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <el-tab-pane label="计划任务">
+        <label class="radio-label" style="padding-left:0;">三级总和不得超过100:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <br><br>
         <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <el-radio-group v-model="switchRoles">
@@ -205,77 +175,31 @@
         </el-radio-group>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level1" style="padding-left:0;">设备序号:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level1" style="padding-left:0;">第一级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level1" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level2" style="padding-left:0;">设备型号[闸机/终端..]:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level2" style="padding-left:0;">第二级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level2" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">设备型号[5501..]nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">IMEI1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">IMEI2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">有效期:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="level3" style="padding-left:0;">第三级:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="接口用户">
-        <div style="display:inline-block;">
-          <label class="radio-label" style="padding-left:0;">接口用户:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <label class="level1" style="padding-left:0;">修改接口调用数量 停用接口用户:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <br><br>
-        </div>
+      <el-tab-pane label="数据初始化">
+        <label class="radio-label" style="padding-left:0;">初始化数据:执行后除基础数据 都将被删除。请谨慎操作！！&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <br><br>
-        <div style="display:inline-block;">
-          <label class="level2" style="padding-left:0;">设备型号[闸机/终端..]:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level2" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
+        <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <el-radio-group v-model="switchRoles">
+          <el-radio-button label="开" />
+          <el-radio-button label="关" />
+        </el-radio-group>
         <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">用户nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">APIKEY:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">APISEC:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">核销路径:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">单日调用数量:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="level3" style="padding-left:0;">总调用数量:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
+
       </el-tab-pane>
-      <el-tab-pane label="快递公司">本地json数据</el-tab-pane>
     </el-tabs>
   </el-card>
 </template>

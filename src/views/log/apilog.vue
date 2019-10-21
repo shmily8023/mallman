@@ -21,54 +21,14 @@
           {{ scope.row.orderId }}
         </template>
       </el-table-column>
-      <el-table-column label="产品名称" width="255" align="center">
+      <el-table-column label="调用时间" width="255" align="center">
         <template slot-scope="scope">
           <el-tag>{{ scope.row.productName }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="产品属性" width="85" align="center">
+      <el-table-column label="调用用户" width="85" align="center">
         <template slot-scope="scope">
           {{ scope.row.productAttr }}
-        </template>
-      </el-table-column>
-      <el-table-column label="下单时间" width="135" align="center">
-        <template>
-          2019-10-16 12:49
-        </template>
-      </el-table-column>
-      <el-table-column label="完成时间" width="135" align="center">
-        <template>
-          2019-10-16 12:49
-        </template>
-      </el-table-column>
-      <el-table-column label="单价" width="70" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userPrice }}
-        </template>
-      </el-table-column>
-      <el-table-column label="数量" width="50" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userNum }}
-        </template>
-      </el-table-column>
-      <el-table-column label="总价" width="90" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userTotalPrice }}
-        </template>
-      </el-table-column>
-      <el-table-column label="用户姓名" width="80" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userName }}
-        </template>
-      </el-table-column>
-      <el-table-column label="用户身份证号" width="175" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userCardId }}
-        </template>
-      </el-table-column>
-      <el-table-column label="用户手机号" width="115" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userPhone }}
         </template>
       </el-table-column>
       <el-table-column label="操作[..]" width="115" align="center">
