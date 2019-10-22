@@ -4,6 +4,8 @@
       <el-tab-pane label="基本配置">
         <div style="display:inline-block;">
           <label class="radio-label" style="padding-left:0;">网站开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <label class="radio-label" style="padding-left:0;">提现审核 意外险处理。</label>
+          <label class="radio-label" style="padding-left:0;">判断抖音 快手环境</label>
           <el-radio-group v-for="item in tabs" :key="item.id" v-model="tabPosition" @click="toggleTab(item.id)">
             <el-radio-button :label="item.name" />
           </el-radio-group>
@@ -48,7 +50,7 @@
         </div>
         <br><br>
         <div style="display:inline-block;">
-          <label class="zkbl" style="padding-left:0;">抵扣比例:&nbsp;&nbsp;&nbsp;</label>
+          <label class="zkbl" style="padding-left:0;">抵扣比例 积分和虚拟币:&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="zkbl" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
         <hr>
@@ -57,6 +59,15 @@
           <label class="zkbl" style="padding-left:0;">首页通知内容:&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="zkbl" placeholder="首页通知内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
+        <div style="display:inline-block;">
+          <label class="zkbl" style="padding-left:0;">引导关注公众号:&nbsp;&nbsp;&nbsp;</label>
+          <el-input v-model="zkbl" placeholder="首页通知内容" style="width:345px;" prefix-icon="el-icon-document" />
+        </div>
+        <div style="display:inline-block;">
+          <label class="zkbl" style="padding-left:0;">首次关注赠送积分:&nbsp;&nbsp;&nbsp;</label>
+          <el-input v-model="zkbl" placeholder="首页通知内容" style="width:345px;" prefix-icon="el-icon-document" />
+        </div>
+        <hr>
         <div style="display:inline-block;">
           <label class="zkbl" style="padding-left:0;">内部通知内容:&nbsp;&nbsp;&nbsp;</label>
           <el-input v-model="zkbl" placeholder="内部通知内容" style="width:345px;" prefix-icon="el-icon-document" />
@@ -189,8 +200,8 @@
           <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="数据初始化">
-        <label class="radio-label" style="padding-left:0;">初始化数据:执行后除基础数据 都将被删除。请谨慎操作！！&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <el-tab-pane label="云存储配置">
+        <label class="radio-label" style="padding-left:0;">COS OSS 七牛&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <br><br>
         <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <el-radio-group v-model="switchRoles">
@@ -198,7 +209,46 @@
           <el-radio-button label="关" />
         </el-radio-group>
         <br><br>
-
+      </el-tab-pane>
+      <el-tab-pane label="短信息配置">
+        <label class="radio-label" style="padding-left:0;">COS OSS 七牛&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br><br>
+        <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <el-radio-group v-model="switchRoles">
+          <el-radio-button label="开" />
+          <el-radio-button label="关" />
+        </el-radio-group>
+        <br><br>
+      </el-tab-pane>
+      <el-tab-pane label="邮件配置">
+        <label class="radio-label" style="padding-left:0;">COS OSS 七牛&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br><br>
+        <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <el-radio-group v-model="switchRoles">
+          <el-radio-button label="开" />
+          <el-radio-button label="关" />
+        </el-radio-group>
+        <br><br>
+      </el-tab-pane>
+      <el-tab-pane label="数据初始化">
+        <label class="radio-label" style="padding-left:0;">初始化数据:执行后除基础数据 都将被删除。请谨慎操作！！&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br><br>
+        <label class="radio-label" style="padding-left:0;">清除用户数据&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br><br>
+        <label class="radio-label" style="padding-left:0;">清除产品数据&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br><br>
+        <label class="radio-label" style="padding-left:0;">清除订单数据&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br><br>
+        <label class="radio-label" style="padding-left:0;">清除客服记录&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br><br>
+        <label class="radio-label" style="padding-left:0;">清除系统记录&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <br><br>
+        <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <el-radio-group v-model="switchRoles">
+          <el-radio-button label="开" />
+          <el-radio-button label="关" />
+        </el-radio-group>
+        <br><br>
       </el-tab-pane>
     </el-tabs>
   </el-card>

@@ -15,58 +15,28 @@
           {{ scope.$index }}111
         </template>
       </el-table-column>-->
-      <el-table-column label="下单订单号" width="110">
+      <el-table-column label="执行时间" width="110">
         <template slot-scope="scope">
           <!--{{ scope.row.orderId }}-->
           {{ scope.row.orderId }}
         </template>
       </el-table-column>
-      <el-table-column label="撤销单号" width="255" align="center">
+      <el-table-column label="执行任务名" width="255" align="center">
         <template slot-scope="scope">
           <el-tag>{{ scope.row.productName }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="撤销数量" width="85" align="center">
+      <el-table-column label="执行任务规则" width="85" align="center">
         <template slot-scope="scope">
           {{ scope.row.productAttr }}
         </template>
       </el-table-column>
-      <el-table-column label="撤销时间" width="135" align="center">
+      <el-table-column label="执行结果" width="135" align="center">
         <template>
           2019-10-16 12:49
         </template>
       </el-table-column>
-      <el-table-column label="撤销状态" width="135" align="center">
-        <template>
-          2019-10-16 12:49
-        </template>
-      </el-table-column>
-      <el-table-column label="撤销备注" width="70" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userPrice }}
-        </template>
-      </el-table-column>
-      <el-table-column label="退回方式" width="50" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userNum }}
-        </template>
-      </el-table-column>
-      <el-table-column label="退回金额" width="90" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userTotalPrice }}
-        </template>
-      </el-table-column>
-      <el-table-column label="退款外部单号" width="80" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userName }}
-        </template>
-      </el-table-column>
-      <el-table-column label="撤销类型[游轮..]" width="175" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userCardId }}
-        </template>
-      </el-table-column>
-      <el-table-column label="撤销产品名称" width="115" align="center">
+      <el-table-column label="执行备注" width="115" align="center">
         <template slot-scope="scope">
           {{ scope.row.userPhone }}
         </template>

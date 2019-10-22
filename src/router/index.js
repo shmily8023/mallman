@@ -265,10 +265,10 @@ export const asyncRoutes = [
       },
       {
         path: 'productsearch',
-        component: () => import('@/views/permission/role'),
+        component: () => import('@/views/product/query'),
         name: 'RolePermission',
         meta: {
-          title: '产品查询[可修改删除]',
+          title: '产品查询[部分完成]',
           roles: ['admin']
         }
       },
@@ -431,7 +431,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/reorderlog'),
         name: 'RolePermission',
         meta: {
-          title: '订单撤改记录',
+          title: '订单撤改记录[部分完成]',
           roles: ['admin']
         }
       },
@@ -445,11 +445,11 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'simchargelog',
-        component: () => import('@/views/log/simchargelog'),
+        path: 'tasklog',
+        component: () => import('@/views/log/tasklog'),
         name: 'RolePermission',
         meta: {
-          title: '计划任务记录',
+          title: '计划任务记录[初步完成]',
           roles: ['admin']
         }
       },

@@ -3,23 +3,69 @@
     <el-tabs :before-leave="moreState">
       <el-tab-pane label="普通门票产品">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>下拉框多选属性 配置属性价格||| 优惠券？？？</span>
+          <span>下拉框多选属性 配置属性价格||| 优惠券？？？ 虚拟 无库存 非虚拟 库存相关 支付手续费 退款手续费</span>
           <el-form-item label="活动名称">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
-          <el-form-item label="砍价总次数">
+          <el-form-item label="线上线下类型">
+            <el-select v-model="sy" placeholder="实名">
+              <el-option label="线上" value="group" />
+              <el-option label="线下" value="pt" />
+              <el-option label="所有" value="dy" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="是否隐藏">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="隐藏" />
+              <el-radio border label="不隐藏" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否实名">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="实名" />
+              <el-radio border label="不实名" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否虚拟">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="虚拟" />
+              <el-radio border label="不虚拟" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否改期">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否退款">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="公众号">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="关注" />
+              <el-radio border label="不关注" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="有效期">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
-          <el-form-item label="砍价范围">
+          <el-form-item label="入园地址">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
-          <el-form-item label="可砍最低价">
+          <el-form-item label="设施包含">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
-          <el-form-item label="价格">
+          <el-form-item label="介绍">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
-          <el-form-item label="活动时间"><span>几点不可购买？</span>
+          <el-form-item label="配置属性价格">
+            <el-input v-model="sizeForm.name" />
+          </el-form-item>
+          <el-form-item label="单用户最多购买几张"><span>几点不可购买？</span>
             <el-col :span="11">
               <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
             </el-col>
@@ -29,12 +75,7 @@
         <el-time-picker v-model="sizeForm.date2" placeholder="选择时间" style="width: 100%;" />
       </el-col>-->
           </el-form-item>
-          <el-form-item label="是否需要关注公众号">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="关注" />
-              <el-radio border label="不关注" />
-            </el-radio-group>
-          </el-form-item>
+
           <el-form-item size="large">
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
             <el-button>取消</el-button>
@@ -43,7 +84,42 @@
       </el-tab-pane>
       <el-tab-pane label="砍价">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置? 是否可以改期 是否退款 退款配置 支付手续费 退款手续费</span>
+          <el-form-item label="是否实名">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="实名" />
+              <el-radio border label="不实名" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否虚拟">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="虚拟" />
+              <el-radio border label="不虚拟" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否改期">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否退款">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否多次入场">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="是" />
+              <el-radio border label="否" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="公众号">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="关注" />
+              <el-radio border label="不关注" />
+            </el-radio-group>
+          </el-form-item>
           <el-form-item label="活动名称">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
@@ -83,7 +159,36 @@
       </el-tab-pane>
       <el-tab-pane label="积分">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置?</span>
+          <el-form-item label="是否实名">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="实名" />
+              <el-radio border label="不实名" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否虚拟">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="虚拟" />
+              <el-radio border label="不虚拟" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否改期">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否退款">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="公众号">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="关注" />
+              <el-radio border label="不关注" />
+            </el-radio-group>
+          </el-form-item>
           <el-form-item label="产品名称">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
@@ -252,7 +357,36 @@
       </el-tab-pane>
       <el-tab-pane label="票付通">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置? 秒杀是否报名</span>
+          <el-form-item label="是否实名">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="实名" />
+              <el-radio border label="不实名" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否虚拟">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="虚拟" />
+              <el-radio border label="不虚拟" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否改期">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否退款">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="公众号">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="关注" />
+              <el-radio border label="不关注" />
+            </el-radio-group>
+          </el-form-item>
           <el-form-item label="" />
           <el-form-item label="产品名">
             <el-checkbox-group v-model="sizeForm.type">
@@ -274,9 +408,6 @@
             <el-input v-model="sizeForm.name" />
           </el-form-item>
           <el-form-item label="密码">
-            <el-input v-model="sizeForm.name" />
-          </el-form-item>
-          <el-form-item label="是否实名">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
           <el-form-item label="产品介绍">
@@ -306,7 +437,36 @@
       </el-tab-pane>
       <el-tab-pane label="联合票">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置? 秒杀是否报名</span>
+          <el-form-item label="是否实名">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="实名" />
+              <el-radio border label="不实名" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否虚拟">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="虚拟" />
+              <el-radio border label="不虚拟" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否改期">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否退款">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="公众号">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="关注" />
+              <el-radio border label="不关注" />
+            </el-radio-group>
+          </el-form-item>
           <el-form-item label="" />
           <el-form-item label="产品">
             <el-checkbox-group v-model="sizeForm.type">
@@ -357,7 +517,36 @@
       </el-tab-pane>
       <el-tab-pane label="区域产品">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置? 秒杀是否报名</span>
+          <el-form-item label="是否实名">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="实名" />
+              <el-radio border label="不实名" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否虚拟">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="虚拟" />
+              <el-radio border label="不虚拟" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否改期">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否退款">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="可以改期" />
+              <el-radio border label="不可改期" />
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="公众号">
+            <el-radio-group v-model="sizeForm.resource" size="medium">
+              <el-radio border label="关注" />
+              <el-radio border label="不关注" />
+            </el-radio-group>
+          </el-form-item>
           <el-form-item label="" />
           <el-form-item label="产品名称">
             <el-input v-model="sizeForm.name" />

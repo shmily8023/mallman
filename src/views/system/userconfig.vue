@@ -2,7 +2,7 @@
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
       <el-tab-pane label="兑票员管理">
-        <label class="webname" style="padding-left:0;">重置支付 登录密码 修改个人资料 查看分销明细:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <label class="webname" style="padding-left:0;">重置支付 登录密码 修改个人资料  用户零钱充值 查看分销明细:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <div style="display:inline-block;">
           <label class="radio-label" style="padding-left:0;">供应商开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-radio-group v-for="item in tabs" :key="item.id" v-model="tabPosition" @click="toggleTab(item.id)">
