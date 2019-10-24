@@ -1,96 +1,97 @@
 <template>
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
-      <el-tab-pane label="客服人员管理">
+      <el-tab-pane label="标签">
         <div style="display:inline-block;">
-          <label class="radio-label" style="padding-left:0;">网站开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-radio-group v-for="item in tabs" :key="item.id" v-model="tabPosition" @click="toggleTab(item.id)">
-            <el-radio-button :label="item.name" />
-          </el-radio-group>
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="webname" style="padding-left:0;">网站名称:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="webname" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="sitecontent" style="padding-left:0;">站点描述:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="sitecontent" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">网站备案号:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="bah" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">公司地址:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="bah" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="bah" style="padding-left:0;">联系电话:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="lxdh" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="radio-label" style="padding-left:0;">资源存储地址:</label>
-          <el-select v-model="sizeForm" placeholder="存储地址">
-            <el-option label="本地存储" value="jiedai" />
-            <el-option label="阿里云存储OSS" value="shichang" />
-            <el-option label="腾讯云COS" value="qita" />
-            <el-option label="七牛云存储" value="none" />
-          </el-select>
-        </div>
-        <br><br>
-        <hr>
-        <div style="display:inline-block;">
-          <label class="xffx" style="padding-left:0;">消费返现:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="xffx" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="zkbl" style="padding-left:0;">抵扣比例:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="zkbl" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <hr>
-        <label class="radio-label" style="padding-left:0;">内部通知/首页通知: </label><br>
-        <div style="display:inline-block;">
-          <label class="zkbl" style="padding-left:0;">首页通知内容:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="zkbl" placeholder="首页通知内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-        <div style="display:inline-block;">
-          <label class="zkbl" style="padding-left:0;">内部通知内容:&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="zkbl" placeholder="内部通知内容" style="width:345px;" prefix-icon="el-icon-document" />
-        </div>
-      </el-tab-pane>
-      <el-tab-pane label="代理商人员">
-        <div style="display:inline-block;">
-          <label class="switchRoles2" style="padding-left:0;">积分开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-radio-group v-model="switchRoles2">
-            <el-radio-button label="开" />
-            <el-radio-button label="关" />
-          </el-radio-group>
-          <br><br>
-          <div style="display:inline-block;">
-            <label class="lxqdn" style="padding-left:0;">连续签到几天:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdn" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <br><br>
-          <div style="display:inline-block;">
-            <label class="lxqdv" style="padding-left:0;">连续签到奖励:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdv" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <br><br>
-          <hr>
-          <el-button @click="addData()">增加数据</el-button>
+          <el-button @click="addData()">新增标签</el-button>
           <div style="display:inline-block; width: 1500px">
             <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
               <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
-              <el-table-column prop="name" label="签到天数" width="120" />
-              <el-table-column prop="address" label="签到值" width="400" show-overflow-tooltip />
+              <el-table-column prop="name" label="备份日期" width="120" />
+              <el-table-column prop="address" label="文件大小" width="400" show-overflow-tooltip />
               <el-table-column label="操作" width="400" show-overflow-tooltip>
-                <template slot-scope="scope">
-                  <el-button type="primary" @click="dialogFormVisible = true">编辑</el-button>
-                  <el-button type="danger" @click.native="delS(scope.row)">删除</el-button>
+                <template>
+                  <el-button type="primary" @click="dialogFormVisible = true">修改</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-dialog title="编辑签到配置" :visible.sync="dialogFormVisible" @closed="handleClose">
+              <el-form ref="ruleForm" :model="form" :rules="rules">
+                <template>
+                  <el-form-item label="签到天数" :label-width="formLabelWidth" prop="name">
+                    <el-input>(scope.row.date)</el-input>
+                  </el-form-item>
+                  <el-form-item label="签到值" :label-width="formLabelWidth">
+                    <el-input>(scope.row.name)</el-input>
+                  </el-form-item>
+                </template>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="handleSave">确 定</el-button>
+              </div>
+            </el-dialog>
+          </div>
+          <div style="margin-top: 20px">
+            <!--<el-button @click="delMulData()">批量删除</el-button>-->
+            <!--<el-button @click="prints()">打印</el-button>-->
+          </div>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="分组">
+        <div style="display:inline-block;">
+          <el-button @click="addData()">新增分组</el-button>
+          <div style="display:inline-block; width: 1500px">
+            <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
+              <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
+              <el-table-column prop="name" label="备份日期" width="120" />
+              <el-table-column prop="address" label="文件大小" width="400" show-overflow-tooltip />
+              <el-table-column label="操作" width="400" show-overflow-tooltip>
+                <template>
+                  <el-button type="primary" @click="dialogFormVisible = true">修改</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-dialog title="编辑签到配置" :visible.sync="dialogFormVisible" @closed="handleClose">
+              <el-form ref="ruleForm" :model="form" :rules="rules">
+                <template>
+                  <el-form-item label="签到天数" :label-width="formLabelWidth" prop="name">
+                    <el-input>(scope.row.date)</el-input>
+                  </el-form-item>
+                  <el-form-item label="签到值" :label-width="formLabelWidth">
+                    <el-input>(scope.row.name)</el-input>
+                  </el-form-item>
+                </template>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="handleSave">确 定</el-button>
+              </div>
+            </el-dialog>
+          </div>
+          <div style="margin-top: 20px">
+            <!--<el-button @click="delMulData()">批量删除</el-button>-->
+            <!--<el-button @click="prints()">打印</el-button>-->
+          </div>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="用户管理">
+        <div style="display:inline-block;">
+          <el-input style="width:180px;" placeholder="请输入查询用户" />
+          <el-button @click="addData()">查询</el-button>
+          <div style="display:inline-block; width: 1500px">
+            <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
+              <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
+              <el-table-column prop="name" label="备份日期" width="120" />
+              <el-table-column prop="address" label="文件大小" width="400" show-overflow-tooltip />
+              <el-table-column label="操作" width="400" show-overflow-tooltip>
+                <template>
+                  <el-button type="primary" @click="dialogFormVisible = true">拉黑</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">取消拉黑</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">打标签</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">打分组</el-button>
                 </template>
               </el-table-column>
             </el-table>

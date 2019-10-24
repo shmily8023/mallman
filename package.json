@@ -1,8 +1,8 @@
 {
-  "name": "vue-element-admin",
+  "name": "智慧旅游支撑平台",
   "version": "4.2.1",
   "description": "A magical vue admin. An out-of-box UI solution for enterprise applications. Newest development stack of vue. Lots of awesome features",
-  "author": "Pan <panfree23@gmail.com>",
+  "author": "Pan <lj101127@163.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
@@ -43,9 +43,12 @@
     "url": "https://github.com/PanJiaChen/vue-element-admin/issues"
   },
   "dependencies": {
+    "ant-design-vue": "^1.4.3",
     "axios": "^0.18.1",
+    "blob-util": "^2.0.2",
     "clipboard": "2.0.4",
     "codemirror": "5.45.0",
+    "css-color-function": "^1.3.3",
     "driver.js": "0.9.5",
     "dropzone": "5.5.1",
     "echarts": "4.2.1",

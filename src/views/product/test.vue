@@ -3,7 +3,7 @@
     <el-tabs :before-leave="moreState">
       <el-tab-pane label="普通门票产品">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>下拉框多选属性 配置属性价格||| 优惠券？？？ 虚拟 无库存 非虚拟 库存相关 支付手续费 退款手续费</span>
+          <span>下拉框多选属性 配置属性价格||| 优惠券？？？ 虚拟 无库存 非虚拟 库存相关 几点不可购买</span>
           <el-form-item label="活动名称">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
@@ -15,34 +15,27 @@
             </el-select>
           </el-form-item>
           <el-form-item label="是否隐藏">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="隐藏" />
-              <el-radio border label="不隐藏" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否实名">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="实名" />
-              <el-radio border label="不实名" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否虚拟">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="虚拟" />
-              <el-radio border label="不虚拟" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否改期">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否退款">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+          </el-form-item>
+          <el-form-item label="是否多次入场">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>多次入场配置</span>
+            <el-select placeholder="多次入场模式">
+              <el-option label="下单之后日期" value="group" />
+              <el-option label="在指定区间" value="pt" />
+            </el-select>
           </el-form-item>
           <el-form-item label="公众号">
             <el-radio-group v-model="sizeForm.resource" size="medium">
@@ -65,7 +58,7 @@
           <el-form-item label="配置属性价格">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
-          <el-form-item label="单用户最多购买几张"><span>几点不可购买？</span>
+          <el-form-item label="单用户最多购买几张"><span>0</span>
             <el-col :span="11">
               <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
             </el-col>
@@ -249,7 +242,6 @@
       </el-tab-pane>
       <el-tab-pane label="限时">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置? 秒杀是否报名</span>
           <el-form-item label="" />
           <el-form-item label="计时方式">
             <el-checkbox-group v-model="sizeForm.type">
@@ -314,6 +306,9 @@
               <el-checkbox-button label="水上乐园" name="type" />
               <el-checkbox-button label="测试。。。。" name="type" />
             </el-checkbox-group>
+          </el-form-item>
+          <el-form-item label="是否需要报名">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="秒杀库存">
             <el-input v-model="sizeForm.name" />
@@ -626,6 +621,7 @@ export default {
       'tabPosition': '英语',
       'tabs': [],
       'lxqdn': '',
+      'validateFlag': '',
       'lxqdv': '',
       'webname': '',
       'sitecontent': '11111',

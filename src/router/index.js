@@ -73,6 +73,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/500',
+    component: () => import('@/views/error-page/401'),
+    hidden: true
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -160,11 +165,38 @@ export const asyncRoutes = [
     },
     children: [
       {
+        path: 'oselect00',
+        component: () => import('@/views/order/summary'),
+        name: 'PagePermission',
+        meta: {
+          title: '订单汇总',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
         path: 'oselect',
         component: () => import('@/views/order/query'),
         name: 'PagePermission',
         meta: {
-          title: '订单查询[查询..]',
+          title: '订单查询[明细]',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'oselect2',
+        component: () => import('@/views/order/query2'),
+        name: 'PagePermission',
+        meta: {
+          title: '订单查询[单条]',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'oselect3',
+        component: () => import('@/views/order/query3'),
+        name: 'PagePermission',
+        meta: {
+          title: '出入明细查询',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -341,7 +373,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/orderlog'),
         name: 'PagePermission',
         meta: {
-          title: '订单日志',
+          title: '订单日志[部分完成]',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -419,10 +451,10 @@ export const asyncRoutes = [
       },
       {
         path: 'lqlog',
-        component: () => import('@/views/permission/role'),
+        component: () => import('@/views/log/logs'),
         name: 'RolePermission',
         meta: {
-          title: '积分零钱记录',
+          title: '积分零钱记录[初步完成]',
           roles: ['admin']
         }
       },
@@ -450,6 +482,15 @@ export const asyncRoutes = [
         name: 'RolePermission',
         meta: {
           title: '计划任务记录[初步完成]',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'tasklog2',
+        component: () => import('@/views/log/adlog'),
+        name: 'RolePermission',
+        meta: {
+          title: '广告记录[初步完成]',
           roles: ['admin']
         }
       },
@@ -482,6 +523,15 @@ export const asyncRoutes = [
         name: 'PagePermission',
         meta: {
           title: '备份/恢复',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'cashman',
+        component: () => import('@/views/system/cashman'),
+        name: 'PagePermission',
+        meta: {
+          title: '提现管理',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },

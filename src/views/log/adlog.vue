@@ -2,10 +2,7 @@
   <div class="app-container">
 
     <div>
-      <div style="display:inline-block;">
-        <label class="radio-label" style="padding-left:0;">请输入订单号: </label>
-        <el-input v-model="filename" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-      </div>
+      <FilenameOption v-model="filename" />
       <!--<AutoWidthOption v-model="autoWidth" />-->
       <!--<BookTypeOption v-model="bookType" />-->
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
@@ -18,60 +15,30 @@
           {{ scope.$index }}111
         </template>
       </el-table-column>-->
-      <el-table-column label="操作时间" width="110">
+      <el-table-column label="点击时间" width="110">
         <template slot-scope="scope">
           <!--{{ scope.row.orderId }}-->
           {{ scope.row.orderId }}
         </template>
       </el-table-column>
-      <el-table-column label="操作用户" width="255" align="center">
+      <el-table-column label="点击时间" width="255" align="center">
         <template slot-scope="scope">
           <el-tag>{{ scope.row.productName }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="操作类型[下单/支付/验证]" width="85" align="center">
+      <el-table-column label="点击位置[首页/产品/验证/支付结果]" width="85" align="center">
         <template slot-scope="scope">
           {{ scope.row.productAttr }}
         </template>
       </el-table-column>
-      <el-table-column label="操作渠道[后端管理/app/miniapp/mp/终端机]" width="135" align="center">
+      <el-table-column label="点击用户" width="135" align="center">
         <template>
           2019-10-16 12:49
         </template>
       </el-table-column>
-      <el-table-column label="完成时间" width="135" align="center">
+      <el-table-column label="产品编号" width="135" align="center">
         <template>
           2019-10-16 12:49
-        </template>
-      </el-table-column>
-      <el-table-column label="单价" width="70" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userPrice }}
-        </template>
-      </el-table-column>
-      <el-table-column label="数量" width="50" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userNum }}
-        </template>
-      </el-table-column>
-      <el-table-column label="总价" width="90" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userTotalPrice }}
-        </template>
-      </el-table-column>
-      <el-table-column label="用户姓名" width="80" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userName }}
-        </template>
-      </el-table-column>
-      <el-table-column label="用户身份证号" width="175" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userCardId }}
-        </template>
-      </el-table-column>
-      <el-table-column label="用户手机号" width="115" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userPhone }}
         </template>
       </el-table-column>
       <el-table-column label="操作[..]" width="115" align="center">
@@ -87,8 +54,11 @@
 import { fetchList } from '@/api/article'
 import { parseTime } from '@/utils'
 // options components
+import FilenameOption from './components/FilenameOption'
+
 export default {
   name: 'ExportExcel',
+  components: { FilenameOption },
   data() {
     return {
       list: null,

@@ -3,7 +3,7 @@
     <el-tabs :before-leave="moreState">
       <el-tab-pane label="产品预订-消费者">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置? 产品是否线上销售</span>
+          <span />
           <el-form-item label="" />
           <el-form-item label="产品类型">
             <el-select v-model="sizeForm.sy" placeholder="申请事由">
@@ -65,17 +65,16 @@
           </el-form-item>
           <el-divider><span>购买人信息</span></el-divider>
           <el-form-item label="购买人">
-            <el-col :span="11">
-              <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择人员" style="width: 50%;" />&nbsp;&nbsp;<span>绑定关系</span>
-            </el-col>
+
+            <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择人员" style="width: 50%;" />&nbsp;<span>您还未实名认证,暂时无法购买&nbsp;&nbsp;</span>去实名<span>&nbsp;&nbsp;</span><span>绑定关系</span>
+
             <br>
-            <el-col :span="11">
-              <el-date-picker v-model="sizeForm.date1" type="date" placeholder="姓名" style="width: 100%;" />
-            </el-col>
+
+            <el-date-picker v-model="sizeForm.date1" type="date" placeholder="姓名" style="width: 100%;" />
             <br>
-            <el-col :span="11">
-              <el-date-picker v-model="sizeForm.date1" type="date" placeholder="手机号" style="width: 100%;" />
-            </el-col>
+
+            <el-date-picker v-model="sizeForm.date1" type="date" placeholder="手机号" style="width: 100%;" />
+
             <br>
             <!--
             <el-col class="line" :span="2">-</el-col>
@@ -102,7 +101,6 @@
       </el-tab-pane>
       <el-tab-pane label="产品预订-供应商">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置?</span>
           <el-form-item label="" />
           <el-form-item label="产品">
             <el-checkbox-group v-model="sizeForm.type">
@@ -127,11 +125,7 @@
               <el-time-picker v-model="sizeForm.date2" placeholder="选择时间" style="width: 100%;" />
             </el-col>-->
           </el-form-item>
-          <el-divider><span>购买人信息</span></el-divider>
           <el-form-item label="购买人">
-            <el-col :span="11">
-              <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择人员" style="width: 50%;" />&nbsp;&nbsp;<span>绑定关系</span>
-            </el-col>
             <br>
             <el-col :span="11">
               <el-date-picker v-model="sizeForm.date1" type="date" placeholder="姓名" style="width: 100%;" />
@@ -139,6 +133,10 @@
             <br>
             <el-col :span="11">
               <el-date-picker v-model="sizeForm.date1" type="date" placeholder="手机号" style="width: 100%;" />
+            </el-col>
+            <br>
+            <el-col :span="11">
+              <el-date-picker v-model="sizeForm.date1" type="date" placeholder="身份证号" style="width: 100%;" />
             </el-col>
             <br>
             <!--

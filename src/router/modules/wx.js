@@ -19,128 +19,94 @@ const nestedRouter = {
       meta: { title: '基本配置' }
     },
     {
-      path: 'menu1100',
+      path: 'userconfig',
+      name: 'userconfig',
+      component: () => import('@/views/wx/user/tag-group'),
+      meta: { title: '用户管理' }
+    },
+    {
+      path: 'autoreply',
       component: () => import('@/views/charts/keyboard'), // Parent router-view
-      name: 'Menu1',
+      name: 'autoreply',
       meta: { title: '自动回复' },
       redirect: '/nested/menu1/menu1-100',
       children: [
         {
-          path: 'menu1-1144',
+          path: 'subcribe',
           component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-144',
+          name: 'subcribe',
           meta: { title: '关注' }
         },
         {
-          path: 'menu1-11155',
+          path: 'uncheck',
           component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-1255',
+          name: 'uncheck',
           meta: { title: '未识别' }
         },
         {
-          path: 'menu1-11166',
+          path: 'gjz',
           component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-1266',
+          name: 'gjz',
           meta: { title: '关键词' }
         }
       ]
     },
     {
-      path: 'menu1177',
-      component: () => import('@/views/charts/keyboard'), // Parent router-view
-      name: 'Menu177',
+      path: 'tempman',
+      component: () => import('@/views/system/sysconfig'), // Parent router-view
+      name: 'tempman',
       meta: { title: '素材管理' },
-      redirect: '/nested/menu1/menu1-1',
       children: [
         {
-          path: 'menu1-1188',
-          component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-188',
-          meta: { title: '消息素材' }
-        },
-        {
-          path: 'menu1-111a',
-          component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-12a',
+          path: 'graph',
+          component: () => import('@/views/system/sysconfig'),
+          name: 'graph',
           meta: { title: '图文素材' }
         },
         {
-          path: 'menu1-111b',
-          component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-12b',
-          meta: { title: '语音素材' }
-        },
-        {
-          path: 'menu1-111c',
-          component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-12c',
-          meta: { title: '视频素材' }
-        },
-        {
-          path: 'menu1-111d',
-          component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-d',
-          meta: { title: '图片素材' }
+          path: 'temp2',
+          component: () => import('@/views/wx/temp/sysconfig'),
+          name: 'temp2',
+          meta: { title: '素材管理' }
         }
       ]
     },
     {
-      path: 'menu11e',
-      component: () => import('@/views/charts/keyboard'), // Parent router-view
-      name: 'Menu1e',
-      meta: { title: '用户管理' },
-      redirect: '/nested/menu1/menu1-1',
+      path: 'wx',
+      component: () => import('@/views/wx/user/tag-group'), // Parent router-view
+      name: 'wx',
+      meta: { title: '群发管理' },
+      redirect: '/wx/user',
       children: [
         {
-          path: 'menu1-11f',
+          path: 'grateful',
           component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-11f',
-          meta: { title: '标签与分组' }
+          name: 'grateful',
+          meta: { title: '群发图文' }
         },
         {
-          path: 'menu1-111h',
+          path: 'gratefulmessage',
           component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-12h',
-          meta: { title: '用户管理' }
+          name: 'gratefulmessage',
+          meta: { title: '群发消息' }
         },
         {
-          path: 'menu1-21i',
+          path: 'gratefulcheck',
           component: () => import('@/views/charts/keyboard'),
-          name: 'Menu1-21i',
-          redirect: '/nested/menu1/menu1-2/menu1-2-1',
-          meta: { title: '消息群发' },
-          children: [
-            {
-              path: 'menu1-2-11j',
-              component: () => import('@/views/charts/keyboard'),
-              name: 'Menu1-2-11j',
-              meta: { title: '群发图文' }
-            },
-            {
-              path: 'menu1-2-21k',
-              component: () => import('@/views/charts/keyboard'),
-              name: 'Menu1-2-21k',
-              meta: { title: '群发消息' }
-            },
-            {
-              path: 'menu1-2-21l',
-              component: () => import('@/views/charts/keyboard'),
-              name: 'Menu1-2-21l',
-              meta: { title: '群发审核' }
-            },
-            {
-              path: 'menu1-2-21m',
-              component: () => import('@/views/charts/keyboard'),
-              name: 'Menu1-2-21m',
-              meta: { title: '群发记录' }
-            }
-          ]
+          name: 'gratefulcheck',
+          meta: { title: '群发审核' }
+        },
+        {
+          path: 'graphlog',
+          component: () => import('@/views/charts/keyboard'),
+          name: 'graphlog',
+          meta: { title: '群发记录' }
         }
       ]
     },
     {
-      path: 'menu21n',
-      name: 'Menu21n',
+      path: 'datafx',
+      name: 'datafx',
       component: () => import('@/views/charts/keyboard'),
       meta: { title: '统计分析' }
     }

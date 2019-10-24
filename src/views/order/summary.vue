@@ -1,13 +1,46 @@
 <template>
   <div class="app-container">
-
+    <span> 12301汇总？ </span>
     <div>
-      <div style="display:inline-block;">
-        <label class="radio-label" style="padding-left:0;">请输入订单号: </label>
-        <el-input v-model="filename" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-      </div>
       <!--<AutoWidthOption v-model="autoWidth" />-->
       <!--<BookTypeOption v-model="bookType" />-->
+      <el-select v-model="sy" placeholder="查询代理商">
+        <el-option label="团队" value="group" />
+        <el-option label="陪同" value="pt" />
+        <el-option label="导游" value="dy" />
+        <el-option label="媒体" value="mt" />
+        <el-option label="踩点" value="cd" />
+      </el-select>
+      <el-select v-model="sy" placeholder="查询供应商">
+        <el-option label="团队" value="group" />
+        <el-option label="陪同" value="pt" />
+        <el-option label="导游" value="dy" />
+        <el-option label="媒体" value="mt" />
+        <el-option label="踩点" value="cd" />
+      </el-select>
+      <el-select v-model="sy" placeholder="查询景区">
+        <el-option label="团队" value="group" />
+        <el-option label="陪同" value="pt" />
+        <el-option label="导游" value="dy" />
+        <el-option label="媒体" value="mt" />
+        <el-option label="踩点" value="cd" />
+      </el-select>
+      <el-select v-model="sy" placeholder="查询产品">
+        <el-option label="团队" value="group" />
+        <el-option label="陪同" value="pt" />
+        <el-option label="导游" value="dy" />
+        <el-option label="媒体" value="mt" />
+        <el-option label="踩点" value="cd" />
+      </el-select>
+      <el-select v-model="sy" placeholder="验证预订">
+        <el-option label="验证" value="group" />
+        <el-option label="预订" value="pt" />
+      </el-select>
+      <br><br>
+      <span>日期</span>
+      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
+      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
+      <br><br>
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">导出</el-button>
       <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;"><el-tag type="info">重发短信..</el-tag></a>
@@ -18,23 +51,23 @@
           {{ scope.$index }}111
         </template>
       </el-table-column>-->
-      <el-table-column label="操作时间" width="110">
+      <el-table-column label="订单号" width="110">
         <template slot-scope="scope">
           <!--{{ scope.row.orderId }}-->
           {{ scope.row.orderId }}
         </template>
       </el-table-column>
-      <el-table-column label="操作用户" width="255" align="center">
+      <el-table-column label="产品名称" width="255" align="center">
         <template slot-scope="scope">
           <el-tag>{{ scope.row.productName }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="操作类型[下单/支付/验证]" width="85" align="center">
+      <el-table-column label="产品属性" width="85" align="center">
         <template slot-scope="scope">
           {{ scope.row.productAttr }}
         </template>
       </el-table-column>
-      <el-table-column label="操作渠道[后端管理/app/miniapp/mp/终端机]" width="135" align="center">
+      <el-table-column label="下单时间" width="135" align="center">
         <template>
           2019-10-16 12:49
         </template>
@@ -96,7 +129,9 @@ export default {
       downloadLoading: false,
       filename: '',
       autoWidth: true,
-      bookType: 'xlsx'
+      bookType: 'xlsx',
+      sy: '',
+      date1: ''
     }
   },
   created() {

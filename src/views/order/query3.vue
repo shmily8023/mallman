@@ -2,12 +2,8 @@
   <div class="app-container">
 
     <div>
-      <span>判断输入的验证码几位 6位验证票付通 9位验证自己 12位验证美团 自我游？.传递参数或后台判断？</span><br>
+      <span>根据唯一订单号 查询出入记录</span><br>
       <FilenameOption v-model="filename" />
-      <el-select v-model="namef" placeholder="验证类型">
-        <el-option label="普通订单" value="group" />
-        <el-option label="单项目订单" value="pt" />
-      </el-select>
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">Export Excel</el-button>
       <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;">
         <el-tag type="info">Documentation</el-tag>

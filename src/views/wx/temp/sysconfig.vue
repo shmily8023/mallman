@@ -1,10 +1,9 @@
 <template>
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
-      <el-tab-pane label="基本配置">
+      <el-tab-pane label="图片素材2">
         <div style="display:inline-block;">
           <label class="radio-label" style="padding-left:0;">网站开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <label class="radio-label" style="padding-left:0;" />
           <label class="radio-label" style="padding-left:0;">意外险处理。判断抖音 快手环境。接口管理 接口停用</label>
           <el-radio-group v-for="item in tabs" :key="item.id" v-model="tabPosition" @click="toggleTab(item.id)">
             <el-radio-button :label="item.name" />
@@ -85,7 +84,7 @@
           <el-input v-model="zkbl" placeholder="内部通知内容" style="width:200px;" prefix-icon="el-icon-document" />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="积分">
+      <el-tab-pane label="视频素材">
         <div style="display:inline-block;">
           <label class="switchRoles2" style="padding-left:0;">积分开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <el-radio-group v-model="switchRoles2">
@@ -140,7 +139,7 @@
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="三级配置">
+      <el-tab-pane label="小视频">
         <label class="radio-label" style="padding-left:0;">三级总和不得超过100:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <br><br>
         <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -164,7 +163,7 @@
           <el-input v-model="level3" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="广告管理">
+      <el-tab-pane label="语音素材">
         <label class="radio-label" style="padding-left:0;">三级总和不得超过100:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <br><br>
         <el-form inline label-width="300px">
@@ -254,120 +253,6 @@
           <el-input v-model="level2" placeholder="请输入修改内容" style="width:200px;" prefix-icon="el-icon-document" />
           <el-button type="info" plain>修改</el-button>
         </el-form>
-      </el-tab-pane>
-      <el-tab-pane label="计划任务">
-        <div style="display:inline-block;">
-          <label class="switchRoles2" style="padding-left:0;">任务开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-radio-group v-model="switchRoles2">
-            <el-radio-button label="开" />
-            <el-radio-button label="关" />
-          </el-radio-group>
-          <br><br>
-          <div style="display:inline-block;">
-            <label class="lxqdn" style="padding-left:0;">任务名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdn" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <div style="display:inline-block;">
-            <label class="lxqdv" style="padding-left:0;">任务周期:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdv" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <br>
-          <div style="display:inline-block;">
-            <label class="lxqdv" style="padding-left:0;">计划任务类:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdv" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <div style="display:inline-block;">
-            <label class="lxqdv" style="padding-left:0;">计划任务方法:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdv" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-          </div>
-          <el-link href="http://www.baidu.com" icon="el-icon-search" type="info" @click.capture="doThis">制作计划任务</el-link>
-          <br><br>
-          <hr>
-          <el-button @click="addData()">增加数据</el-button>
-          <div style="display:inline-block; width: 1500px">
-            <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
-              <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
-              <el-table-column prop="name" label="签到天数" width="120" />
-              <el-table-column prop="address" label="签到值" width="400" show-overflow-tooltip />
-              <el-table-column label="操作" width="400" show-overflow-tooltip>
-                <template slot-scope="scope">
-                  <el-button type="primary" @click="dialogFormVisible = true">编辑</el-button>
-                  <el-button type="danger" @click.native="delS(scope.row)">删除</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <el-dialog title="编辑签到配置" :visible.sync="dialogFormVisible" @closed="handleClose">
-              <el-form ref="ruleForm" :model="form" :rules="rules">
-                <template>
-                  <el-form-item label="签到天数" :label-width="formLabelWidth" prop="name">
-                    <el-input>(scope.row.date)</el-input>
-                  </el-form-item>
-                  <el-form-item label="签到值" :label-width="formLabelWidth">
-                    <el-input>(scope.row.name)</el-input>
-                  </el-form-item>
-                </template>
-              </el-form>
-              <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="handleSave">确 定</el-button>
-              </div>
-            </el-dialog>
-          </div>
-          <div style="margin-top: 20px">
-            <!--<el-button @click="delMulData()">批量删除</el-button>-->
-            <!--<el-button @click="prints()">打印</el-button>-->
-          </div>
-        </div>
-      </el-tab-pane>
-      <el-tab-pane label="短信息配置">
-        <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <el-radio-group v-model="switchRoles">
-          <el-radio-button label="开" />
-          <el-radio-button label="关" />
-        </el-radio-group>
-        <br><br>
-      </el-tab-pane>
-      <el-tab-pane label="邮件配置">
-        <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <el-radio-group v-model="switchRoles">
-          <el-radio-button label="开" />
-          <el-radio-button label="关" />
-        </el-radio-group>
-        <br><br>
-        <div style="display:inline-block;">
-          <label class="webname" style="padding-left:0;">SMTP:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="webname" placeholder="请输入查询内容" style="width:200px;" prefix-icon="el-icon-document" />
-        </div>
-        <br>
-        <div style="display:inline-block;">
-          <label class="webname" style="padding-left:0;">SMTP-AUTH:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="webname" placeholder="请输入查询内容" style="width:200px;" prefix-icon="el-icon-document" />
-        </div>
-        <br>
-        <div style="display:inline-block;">
-          <label class="webname" style="padding-left:0;">SMTP-AUTH-USER:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="webname" placeholder="请输入查询内容" style="width:200px;" prefix-icon="el-icon-document" />
-        </div>
-        <br>
-        <div style="display:inline-block;">
-          <label class="webname" style="padding-left:0;">SMTP-AUTH-PASSWORD:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <el-input v-model="webname" placeholder="请输入查询内容" style="width:200px;" prefix-icon="el-icon-document" />
-        </div>
-      </el-tab-pane>
-      <el-tab-pane label="数据初始化">
-        <label class="radio-label" style="padding-left:0;">初始化数据:执行后除基础数据 都将被删除。请谨慎操作！！&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <br><br>
-        <label class="radio-label" style="padding-left:0;">清除用户数据&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <br><br>
-        <label class="radio-label" style="padding-left:0;">清除产品数据&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <br><br>
-        <label class="radio-label" style="padding-left:0;">清除订单数据&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <br><br>
-        <label class="radio-label" style="padding-left:0;">清除客服记录&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <br><br>
-        <label class="radio-label" style="padding-left:0;">清除系统记录&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <br><br>
-        <br><br>
       </el-tab-pane>
     </el-tabs>
   </el-card>
@@ -505,7 +390,6 @@ export default {
       }
     },
     doThis() {
-      window.open('http://www.jsons.cn/quartzcron/', '_blank')
     },
     getTabs() {
       this.$http.get('/categories').then(val => {
