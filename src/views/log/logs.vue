@@ -2,24 +2,22 @@
   <div class="app-container">
     <div>
       <div style="display:inline-block;">
-        <label class="bah" style="padding-left:0;">查询内容[增加时间表单]:&nbsp;&nbsp;&nbsp;</label>
-        <el-input v-model="bah" placeholder="请输入查询内容" style="width:200px;" prefix-icon="el-icon-document" />
-      </div>
-      <div style="display:inline-block;">
+        <label class="bah" style="padding-left:0;">查询内容:&nbsp;&nbsp;</label>
+        <el-date-picker type="date" placeholder="选择日期" style="width: 15%;" />
+        <el-date-picker type="date" placeholder="选择日期" style="width: 15%;" />
         <label class="radio-label" style="padding-left:0;">查询类型:</label>
         <el-select v-model="sizeForm" placeholder="查询类型">
           <el-option label="积分" value="jiedai" />
           <el-option label="零钱" value="shichang" />
         </el-select>
-      </div>
-      <div style="display:inline-block;">
         <label class="radio-label" style="padding-left:0;">变动类型:</label>
         <el-select v-model="sizeForm" placeholder="变动类型">
-          <el-option label="增加" value="jiedai" />
-          <el-option label="减少" value="shichang" />
+          <el-option label="消费" value="jiedai" />
+          <el-option label="充值" value="shichang" />
+          <el-option label="提现" value="shichang" />
         </el-select>
+        <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询积分零钱</el-button>
       </div>
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询积分零钱</el-button>
     </div>
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
       <!--<el-table-column align="center" label="Id" width="95" style="display:none">
@@ -27,35 +25,30 @@
           {{ scope.$index }}111
         </template>
       </el-table-column>-->
-      <el-table-column label="点击时间" width="110">
+      <el-table-column label="变动时间" width="110">
         <template slot-scope="scope">
           <!--{{ scope.row.orderId }}-->
           {{ scope.row.orderId }}
         </template>
       </el-table-column>
-      <el-table-column label="点击时间" width="255" align="center">
+      <el-table-column label="变动类型[积分/零钱]" width="255" align="center">
         <template slot-scope="scope">
           <el-tag>{{ scope.row.productName }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="点击位置[首页/产品/验证/支付结果]" width="85" align="center">
+      <el-table-column label="变动类型[消费 充值 提现]" width="85" align="center">
         <template slot-scope="scope">
           {{ scope.row.productAttr }}
         </template>
       </el-table-column>
-      <el-table-column label="点击用户" width="135" align="center">
+      <el-table-column label="变动用户" width="135" align="center">
         <template>
           2019-10-16 12:49
         </template>
       </el-table-column>
-      <el-table-column label="产品编号" width="135" align="center">
+      <el-table-column label="备注" width="135" align="center">
         <template>
           2019-10-16 12:49
-        </template>
-      </el-table-column>
-      <el-table-column label="操作[..]" width="115" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.orderId }}
         </template>
       </el-table-column>
     </el-table>

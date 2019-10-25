@@ -2,9 +2,9 @@
   <div class="app-container">
 
     <div>
-      <FilenameOption v-model="filename" />
-      <!--<AutoWidthOption v-model="autoWidth" />-->
-      <!--<BookTypeOption v-model="bookType" />-->
+      <el-date-picker type="date" placeholder="选择日期" style="width: 15%;" />
+      <el-date-picker type="date" placeholder="选择日期" style="width: 15%;" />
+      <el-input style="width: 15%;" placeholder="APIID" />
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">导出</el-button>
       <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;"><el-tag type="info">重发短信..</el-tag></a>
@@ -44,11 +44,8 @@
 import { fetchList } from '@/api/article'
 import { parseTime } from '@/utils'
 // options components
-import FilenameOption from './components/FilenameOption'
-
 export default {
   name: 'ExportExcel',
-  components: { FilenameOption },
   data() {
     return {
       list: null,

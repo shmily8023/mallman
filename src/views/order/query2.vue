@@ -2,12 +2,11 @@
   <div class="app-container">
 
     <div>
-      <span>根据日期 姓名 手机号 身份证号码 确定唯一订单号 返回订单基本信息。管理查全库，代理查代理下 供应商查自己的</span><br>
-      <FilenameOption v-model="filename" />
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">Export Excel</el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;">
-        <el-tag type="info">Documentation</el-tag>
-      </a>
+      <span>根据日期 姓名 手机号 身份证号码 确定唯一订单号 返回订单基本信息。管理查全库，代理查代理下 供应商查自己的。本应用可以查看单订单验证明细，撤销明细 未验证数量 撤销退款明细状态</span><br>
+      <el-input style="width: 15%;" placeholder="输入姓名" />
+      <el-input style="width: 15%;" placeholder="输入身份证号" />
+      <el-input style="width: 15%;" placeholder="输入手机号" />
+      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
     </div>
 
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
@@ -67,11 +66,9 @@
 import { fetchList } from '@/api/article'
 import { parseTime } from '@/utils'
 // options components
-import FilenameOption from './components/FilenameOption'
 
 export default {
   name: 'ExportExcel',
-  components: { FilenameOption },
   data() {
     return {
       list: null,

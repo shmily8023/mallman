@@ -2,12 +2,9 @@
   <div class="app-container">
 
     <div>
-      <span>根据唯一订单号 查询出入记录</span><br>
+      <span>根据唯一订单号 查询出入记录。仅仅在一号一单有效</span><br>
       <FilenameOption v-model="filename" />
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">Export Excel</el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;">
-        <el-tag type="info">Documentation</el-tag>
-      </a>
     </div>
 
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
@@ -23,40 +20,14 @@
           {{ scope.row.orderId }}
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" width="110" align="center">
+      <el-table-column label="出入时间" width="80" align="center">
         <template>
           <!-- <el-tag>{{ scope.row.orderId }}</el-tag>-->
         </template>
       </el-table-column>
-      <el-table-column label="下单时间" width="110" align="center">
+      <el-table-column label="方向[进场/出场]" width="120" align="center">
         <template>
           <!-- <el-tag>{{ scope.row.orderId }}</el-tag>-->
-        </template>
-      </el-table-column>
-      <el-table-column label="有效期" width="115" align="center">
-        <template>
-          <!--{{ scope.row.orderId }}-->
-        </template>
-      </el-table-column>
-      <el-table-column label="产品名称" width="115" align="center">
-        <template>
-          <!--{{ scope.row.orderId }}-->
-        </template>
-      </el-table-column>
-      <el-table-column label="待验证数量" width="115" align="center">
-        <template>
-          <!--{{ scope.row.orderId }}-->
-        </template>
-      </el-table-column>
-      <el-table-column label="已验证数量" width="115" align="center">
-        <template>
-          <!--{{ scope.row.orderId }}-->
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="操作" width="220">
-        <template>
-          <i class="el-icon-time" />
-          <!--<span>{{ scope.row.orderId | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>-->
         </template>
       </el-table-column>
     </el-table>

@@ -1,49 +1,35 @@
 <template>
   <div class="app-container">
-    <span>普通消费者查询:自己下过的单。 代理商 查询代理商下管理的供应商所有订单。 供应商查询 查看供应商下消费者订单 12301汇总？ 查询出入明细</span>
+    <span>普通消费者查询:自己下过的单。 代理商 查询代理商下管理的供应商所有订单。 供应商查询 查看供应商下消费者订单 12301汇总？ 查询出入明细 重发短信？重发模板消息？</span>
     <div>
       <!--<AutoWidthOption v-model="autoWidth" />-->
       <!--<BookTypeOption v-model="bookType" />-->
-      <el-select v-model="sy" placeholder="查询代理商">
-        <el-option label="团队" value="group" />
+      <el-select v-model="sy" placeholder="查询代理商" style="width: 16%;">
+        <el-option label="济南型直接旅游有限公司" value="group" />
         <el-option label="陪同" value="pt" />
         <el-option label="导游" value="dy" />
         <el-option label="媒体" value="mt" />
         <el-option label="踩点" value="cd" />
       </el-select>
-      <el-select v-model="sy" placeholder="查询供应商">
-        <el-option label="团队" value="group" />
+      <el-select v-model="sy" placeholder="查询供应商" style="width: 20%;">
+        <el-option label="临沂宝山前野生风景旅游风景区" value="group" />
         <el-option label="陪同" value="pt" />
         <el-option label="导游" value="dy" />
         <el-option label="媒体" value="mt" />
         <el-option label="踩点" value="cd" />
       </el-select>
-      <el-select v-model="sy" placeholder="查询景区">
-        <el-option label="团队" value="group" />
+      <el-select v-model="sy" placeholder="查询产品" style="width: 13%;">
+        <el-option label="陆地一票通测试2" value="group" />
         <el-option label="陪同" value="pt" />
         <el-option label="导游" value="dy" />
         <el-option label="媒体" value="mt" />
         <el-option label="踩点" value="cd" />
       </el-select>
-      <el-select v-model="sy" placeholder="查询产品">
-        <el-option label="团队" value="group" />
-        <el-option label="陪同" value="pt" />
-        <el-option label="导游" value="dy" />
-        <el-option label="媒体" value="mt" />
-        <el-option label="踩点" value="cd" />
-      </el-select>
-      <br><br>
       <span>预订日期</span>
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <br><br>
-      <span>验证日期</span>
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <br><br>
+      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 12%;" />
+      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 12%;" />
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">导出</el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;"><el-tag type="info">重发短信..</el-tag></a>
     </div>
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
       <!--<el-table-column align="center" label="Id" width="95" style="display:none">

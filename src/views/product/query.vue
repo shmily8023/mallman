@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <span>普通消费者查询:自己下过的单。 代理商 查询代理商下管理的供应商所有订单。 供应商查询 查看供应商下消费者订单 12301汇总？ 查询出入明细</span>
+    <span>配置产品 上架 下架。是否虚拟 是否实名 是否改期 是否退款。是否关注公众号。是否多长入场配置。显示当前库存</span>
     <div>
       <!--<AutoWidthOption v-model="autoWidth" />-->
       <!--<BookTypeOption v-model="bookType" />-->
@@ -11,50 +11,9 @@
         <el-option label="媒体" value="mt" />
         <el-option label="踩点" value="cd" />
       </el-select>
-      <el-select v-model="sy" placeholder="区域">
-        <el-option label="团队" value="group" />
-        <el-option label="陪同" value="pt" />
-        <el-option label="导游" value="dy" />
-        <el-option label="媒体" value="mt" />
-        <el-option label="踩点" value="cd" />
-      </el-select>
-      <el-select v-model="sy" placeholder="实名">
-        <el-option label="团队" value="group" />
-        <el-option label="陪同" value="pt" />
-        <el-option label="导游" value="dy" />
-        <el-option label="媒体" value="mt" />
-        <el-option label="踩点" value="cd" />
-      </el-select>
-      <el-select v-model="sy" placeholder="虚拟">
-        <el-option label="团队" value="group" />
-        <el-option label="陪同" value="pt" />
-        <el-option label="导游" value="dy" />
-        <el-option label="媒体" value="mt" />
-        <el-option label="踩点" value="cd" />
-      </el-select>
-      <el-select v-model="sy" placeholder="产品类型">
-        <el-option label="基本门票" value="group" />
-        <el-option label="票付通" value="pt" />
-        <el-option label="联合票" value="dy" />
-        <el-option label="区域票" value="mt" />
-        <el-option label="砍价" value="cd" />
-        <el-option label="积分" value="pt" />
-        <el-option label="拼团" value="dy" />
-        <el-option label="限时" value="mt" />
-        <el-option label="秒杀" value="cd" />
-      </el-select>
-      <br><br>
-      <span>预订日期</span>
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <br><br>
-      <span>验证日期</span>
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <br><br>
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">导出</el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;"><el-tag type="info">重发短信..</el-tag></a>
+      <span>上下架：</span>
+      <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
     </div>
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
       <!--<el-table-column align="center" label="Id" width="95" style="display:none">
@@ -62,7 +21,7 @@
           {{ scope.$index }}111
         </template>
       </el-table-column>-->
-      <el-table-column label="订单号" width="110">
+      <el-table-column label="产品编号" width="110">
         <template slot-scope="scope">
           <!--{{ scope.row.orderId }}-->
           {{ scope.row.orderId }}
@@ -78,49 +37,39 @@
           {{ scope.row.productAttr }}
         </template>
       </el-table-column>
-      <el-table-column label="下单时间" width="135" align="center">
+      <el-table-column label="上下架" width="135" align="center">
         <template>
           2019-10-16 12:49
         </template>
       </el-table-column>
-      <el-table-column label="完成时间" width="135" align="center">
+      <el-table-column label="虚拟" width="135" align="center">
         <template>
           2019-10-16 12:49
         </template>
       </el-table-column>
-      <el-table-column label="单价" width="70" align="center">
+      <el-table-column label="实名" width="70" align="center">
         <template slot-scope="scope">
           {{ scope.row.userPrice }}
         </template>
       </el-table-column>
-      <el-table-column label="数量" width="50" align="center">
+      <el-table-column label="改期" width="50" align="center">
         <template slot-scope="scope">
           {{ scope.row.userNum }}
         </template>
       </el-table-column>
-      <el-table-column label="总价" width="90" align="center">
+      <el-table-column label="退款" width="90" align="center">
         <template slot-scope="scope">
           {{ scope.row.userTotalPrice }}
         </template>
       </el-table-column>
-      <el-table-column label="用户姓名" width="80" align="center">
+      <el-table-column label="关注公众号" width="80" align="center">
         <template slot-scope="scope">
           {{ scope.row.userName }}
         </template>
       </el-table-column>
-      <el-table-column label="用户身份证号" width="175" align="center">
+      <el-table-column label="当前库存" width="80" align="center">
         <template slot-scope="scope">
-          {{ scope.row.userCardId }}
-        </template>
-      </el-table-column>
-      <el-table-column label="用户手机号" width="115" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.userPhone }}
-        </template>
-      </el-table-column>
-      <el-table-column label="操作[..]" width="115" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.orderId }}
+          {{ scope.row.userName }}
         </template>
       </el-table-column>
     </el-table>

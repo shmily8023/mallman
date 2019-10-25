@@ -5,7 +5,7 @@
         <div style="display:inline-block;">
           <label class="radio-label" style="padding-left:0;">网站开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <label class="radio-label" style="padding-left:0;" />
-          <label class="radio-label" style="padding-left:0;">意外险处理。判断抖音 快手环境。接口管理 接口停用</label>
+          <label class="radio-label" style="padding-left:0;">意外险处理。判断抖音 快手环境。接口管理 接口停用。积分 积分类型:消费积分 签到积分 推荐积分 是否支持 动态获取停车场数据 附近停车场 [仅展示5个]</label>
           <el-radio-group v-for="item in tabs" :key="item.id" v-model="tabPosition" @click="toggleTab(item.id)">
             <el-radio-button :label="item.name" />
           </el-radio-group>

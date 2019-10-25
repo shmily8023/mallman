@@ -1,19 +1,15 @@
 <template>
   <div class="app-container">
-
     <div>
       <span>判断输入的验证码几位 6位验证票付通 9位验证自己 12位验证美团 自我游？.传递参数或后台判断？</span><br>
-      <FilenameOption v-model="filename" />
+      <el-input style="width: 15%;" placeholder="输入凭证码/验证码/券码" />
       <el-select v-model="namef" placeholder="验证类型">
         <el-option label="普通订单" value="group" />
         <el-option label="单项目订单" value="pt" />
       </el-select>
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">Export Excel</el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;">
-        <el-tag type="info">Documentation</el-tag>
-      </a>
+      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
+      <span>状态:</span><span>验证时间未到/订单已过期/订单申请退款中/可验证数量不足</span>
     </div>
-
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
       <el-table-column align="center" label="Id" width="95">
         <template>
@@ -70,12 +66,8 @@
 <script>
 import { fetchList } from '@/api/article'
 import { parseTime } from '@/utils'
-// options components
-import FilenameOption from './components/FilenameOption'
-
 export default {
   name: 'ExportExcel',
-  components: { FilenameOption },
   data() {
     return {
       list: null,

@@ -1,24 +1,10 @@
 <template>
   <div class="app-container">
-    <span> 12301汇总？ </span>
+    <span> 12301汇总？总管理体现 代理商细节 json-->返回复杂table </span>
     <div>
       <!--<AutoWidthOption v-model="autoWidth" />-->
       <!--<BookTypeOption v-model="bookType" />-->
-      <el-select v-model="sy" placeholder="查询代理商">
-        <el-option label="团队" value="group" />
-        <el-option label="陪同" value="pt" />
-        <el-option label="导游" value="dy" />
-        <el-option label="媒体" value="mt" />
-        <el-option label="踩点" value="cd" />
-      </el-select>
       <el-select v-model="sy" placeholder="查询供应商">
-        <el-option label="团队" value="group" />
-        <el-option label="陪同" value="pt" />
-        <el-option label="导游" value="dy" />
-        <el-option label="媒体" value="mt" />
-        <el-option label="踩点" value="cd" />
-      </el-select>
-      <el-select v-model="sy" placeholder="查询景区">
         <el-option label="团队" value="group" />
         <el-option label="陪同" value="pt" />
         <el-option label="导游" value="dy" />
@@ -32,18 +18,10 @@
         <el-option label="媒体" value="mt" />
         <el-option label="踩点" value="cd" />
       </el-select>
-      <el-select v-model="sy" placeholder="验证预订">
-        <el-option label="验证" value="group" />
-        <el-option label="预订" value="pt" />
-      </el-select>
-      <br><br>
       <span>日期</span>
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 35%;" />
-      <br><br>
+      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 15%;" />
+      <el-date-picker v-model="date1" type="date" placeholder="选择日期" style="width: 15%;" />
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">导出</el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;"><el-tag type="info">重发短信..</el-tag></a>
     </div>
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
       <!--<el-table-column align="center" label="Id" width="95" style="display:none">

@@ -108,7 +108,7 @@
         <br><br>
       </el-tab-pane>
       <el-tab-pane label="员工配置[供应商人员|兑票员]">
-        <label class="radio-label" style="padding-left:0;">部分摄像头直播暂停 直播删除:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <label class="radio-label" style="padding-left:0;">部分摄像头直播暂停 直播删除 兑票员限制核销指定产品:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <br><br>
         <label class="switchRoles" style="padding-left:0;">配置开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <el-radio-group v-model="switchRoles">

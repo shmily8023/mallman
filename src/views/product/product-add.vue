@@ -2,9 +2,9 @@
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
       <el-tab-pane label="普通门票产品">
-        <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>下拉框多选属性 配置属性价格||| 优惠券？？？ 虚拟 无库存 非虚拟 库存相关 几点不可购买</span>
-          <el-form-item label="活动名称">
+        <el-form ref="form" :model="sizeForm" label-width="160px" size="mini">
+          <span> 配置属性价格||| 优惠券？？？售后服务？卡票类型:身高 年龄必须实名,验票验证身份 配置所属分类。是否强制执行预订日期预订日期游玩，过期处理，自动退款还是资金归于系统</span>
+          <el-form-item label="产品名称">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
           <el-form-item label="线上线下类型">
@@ -14,20 +14,25 @@
               <el-option label="所有" value="dy" />
             </el-select>
           </el-form-item>
-          <el-form-item label="是否隐藏">
+          <el-form-item label="配置开关">
+            <span>是否隐藏：</span>
             <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
-          </el-form-item>
-          <el-form-item label="是否实名">
+            <span>是否实名：</span>
             <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
-          </el-form-item>
-          <el-form-item label="是否虚拟">
+            <span>是否虚拟：</span>
             <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
-          </el-form-item>
-          <el-form-item label="是否改期">
+            <span>是否改期：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要关注公众号：</span>
             <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否退款">
             <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>退款配置</span>
+          </el-form-item>
+          <el-form-item label="验证有效期">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>验证配置</span>
           </el-form-item>
           <el-form-item label="是否多次入场">
             <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
@@ -37,16 +42,7 @@
               <el-option label="在指定区间" value="pt" />
             </el-select>
           </el-form-item>
-          <el-form-item label="公众号">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="关注" />
-              <el-radio border label="不关注" />
-            </el-radio-group>
-          </el-form-item>
           <el-form-item label="有效期">
-            <el-input v-model="sizeForm.name" />
-          </el-form-item>
-          <el-form-item label="入园地址">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
           <el-form-item label="设施包含">
@@ -55,8 +51,9 @@
           <el-form-item label="介绍">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
-          <el-form-item label="配置属性价格">
-            <el-input v-model="sizeForm.name" />
+          <el-form-item label="属性价格[多选]">
+            <el-select v-model="value1price" multiple placeholder="请选择">
+              <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value" /></el-select>
           </el-form-item>
           <el-form-item label="单用户最多购买几张"><span>0</span>
             <el-col :span="11">
@@ -76,42 +73,37 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="砍价">
-        <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="是否实名">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="实名" />
-              <el-radio border label="不实名" />
-            </el-radio-group>
+        <el-form ref="form" :model="sizeForm" label-width="150px" size="mini">
+          <el-form-item label="线上线下类型">
+            <el-select v-model="sy" placeholder="实名">
+              <el-option label="线上" value="group" />
+              <el-option label="线下" value="pt" />
+              <el-option label="所有" value="dy" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="是否虚拟">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="虚拟" />
-              <el-radio border label="不虚拟" />
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="是否改期">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+          <el-form-item label="配置开关">
+            <span>是否隐藏：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否实名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否虚拟：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否改期：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要关注公众号：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否退款">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>退款配置</span>
           </el-form-item>
           <el-form-item label="是否多次入场">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="是" />
-              <el-radio border label="否" />
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="公众号">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="关注" />
-              <el-radio border label="不关注" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>多次入场配置</span>
+            <el-select placeholder="多次入场模式">
+              <el-option label="下单之后日期" value="group" />
+              <el-option label="在指定区间" value="pt" />
+            </el-select>
           </el-form-item>
           <el-form-item label="活动名称">
             <el-input v-model="sizeForm.name" />
@@ -138,12 +130,6 @@
         <el-time-picker v-model="sizeForm.date2" placeholder="选择时间" style="width: 100%;" />
       </el-col>-->
           </el-form-item>
-          <el-form-item label="是否需要关注公众号">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="关注" />
-              <el-radio border label="不关注" />
-            </el-radio-group>
-          </el-form-item>
           <el-form-item size="large">
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
             <el-button>取消</el-button>
@@ -152,35 +138,36 @@
       </el-tab-pane>
       <el-tab-pane label="积分">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="是否实名">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="实名" />
-              <el-radio border label="不实名" />
-            </el-radio-group>
+          <el-form-item label="线上线下类型">
+            <el-select v-model="sy" placeholder="实名">
+              <el-option label="线上" value="group" />
+              <el-option label="线下" value="pt" />
+              <el-option label="所有" value="dy" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="是否虚拟">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="虚拟" />
-              <el-radio border label="不虚拟" />
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="是否改期">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+          <el-form-item label="配置开关">
+            <span>是否隐藏：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否实名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否虚拟：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否改期：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要关注公众号：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否退款">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>退款配置</span>
           </el-form-item>
-          <el-form-item label="公众号">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="关注" />
-              <el-radio border label="不关注" />
-            </el-radio-group>
+          <el-form-item label="是否多次入场">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>多次入场配置</span>
+            <el-select placeholder="多次入场模式">
+              <el-option label="下单之后日期" value="group" />
+              <el-option label="在指定区间" value="pt" />
+            </el-select>
           </el-form-item>
           <el-form-item label="产品名称">
             <el-input v-model="sizeForm.name" />
@@ -241,8 +228,38 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="限时">
-        <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="" />
+        <el-form ref="form" :model="sizeForm" label-width="160px" size="mini">
+          <el-form-item label="线上线下类型">
+            <el-select v-model="sy" placeholder="实名">
+              <el-option label="线上" value="group" />
+              <el-option label="线下" value="pt" />
+              <el-option label="所有" value="dy" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="配置开关">
+            <span>是否隐藏：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否实名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否虚拟：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否改期：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要关注公众号：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+          </el-form-item>
+          <el-form-item label="是否退款">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>退款配置</span>
+          </el-form-item>
+          <el-form-item label="是否多次入场">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>多次入场配置</span>
+            <el-select placeholder="多次入场模式">
+              <el-option label="下单之后日期" value="group" />
+              <el-option label="在指定区间" value="pt" />
+            </el-select>
+          </el-form-item>
           <el-form-item label="计时方式">
             <el-checkbox-group v-model="sizeForm.type">
               <el-checkbox-button label="正计时" name="type" />
@@ -297,18 +314,46 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="秒杀产品">
-        <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <span>多次入场配置? 秒杀是否报名</span>
-          <el-form-item label="" />
+        <el-form ref="form" :model="sizeForm" label-width="160px" size="mini">
+          <el-form-item label="线上线下类型">
+            <el-select v-model="sy" placeholder="实名">
+              <el-option label="线上" value="group" />
+              <el-option label="线下" value="pt" />
+              <el-option label="所有" value="dy" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="配置开关">
+            <span>是否隐藏：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否实名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否虚拟：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否改期：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要关注公众号：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要报名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+          </el-form-item>
+          <el-form-item label="是否退款">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>退款配置</span>
+          </el-form-item>
+          <el-form-item label="是否多次入场">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>多次入场配置</span>
+            <el-select placeholder="多次入场模式">
+              <el-option label="下单之后日期" value="group" />
+              <el-option label="在指定区间" value="pt" />
+            </el-select>
+          </el-form-item>
           <el-form-item label="产品">
             <el-checkbox-group v-model="sizeForm.type">
               <el-checkbox-button label="陆地项目" name="type" />
               <el-checkbox-button label="水上乐园" name="type" />
               <el-checkbox-button label="测试。。。。" name="type" />
             </el-checkbox-group>
-          </el-form-item>
-          <el-form-item label="是否需要报名">
-            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="秒杀库存">
             <el-input v-model="sizeForm.name" />
@@ -330,59 +375,47 @@
             <el-col :span="11">
               <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
             </el-col>
-            <!--
-              <el-col class="line" :span="2">-</el-col>
-              <el-col :span="11">
-                <el-time-picker v-model="sizeForm.date2" placeholder="选择时间" style="width: 100%;" />
-              </el-col>-->
           </el-form-item>
-          <!--
-    <el-form-item label="特殊资源">
-      <el-radio-group v-model="sizeForm.resource" size="medium">
-        <el-radio border label="线上品牌商赞助" />
-        <el-radio border label="线下场地免费" />
-      </el-radio-group>
-    </el-form-item>
-	-->
           <el-form-item size="large">
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
-            <el-button>取消</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="票付通">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="是否实名">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="实名" />
-              <el-radio border label="不实名" />
-            </el-radio-group>
+          <el-form-item label="线上线下类型">
+            <el-select v-model="sy" placeholder="实名">
+              <el-option label="线上" value="group" />
+              <el-option label="线下" value="pt" />
+              <el-option label="所有" value="dy" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="是否虚拟">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="虚拟" />
-              <el-radio border label="不虚拟" />
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="是否改期">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+          <el-form-item label="配置开关">
+            <span>是否隐藏：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否实名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否虚拟：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否改期：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要关注公众号：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要报名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否退款">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>退款配置</span>
           </el-form-item>
-          <el-form-item label="公众号">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="关注" />
-              <el-radio border label="不关注" />
-            </el-radio-group>
+          <el-form-item label="是否多次入场">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>多次入场配置</span>
+            <el-select placeholder="多次入场模式">
+              <el-option label="下单之后日期" value="group" />
+              <el-option label="在指定区间" value="pt" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="" />
           <el-form-item label="产品名">
             <el-checkbox-group v-model="sizeForm.type">
               <el-checkbox-button label="陆地项目" name="type" />
@@ -410,20 +443,7 @@
             <el-col :span="11">
               <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
             </el-col>
-            <!--
-              <el-col class="line" :span="2">是否实名</el-col>
-              <el-col :span="11">
-                <el-time-picker v-model="sizeForm.date2" placeholder="选择时间" style="width: 100%;" />
-              </el-col>-->
           </el-form-item>
-          <!--
-    <el-form-item label="特殊资源">
-      <el-radio-group v-model="sizeForm.resource" size="medium">
-        <el-radio border label="线上品牌商赞助" />
-        <el-radio border label="线下场地免费" />
-      </el-radio-group>
-    </el-form-item>
-	-->
           <el-form-item size="large">
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
             <el-button>取消</el-button>
@@ -432,37 +452,39 @@
       </el-tab-pane>
       <el-tab-pane label="联合票">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="是否实名">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="实名" />
-              <el-radio border label="不实名" />
-            </el-radio-group>
+          <el-form-item label="线上线下类型">
+            <el-select v-model="sy" placeholder="实名">
+              <el-option label="线上" value="group" />
+              <el-option label="线下" value="pt" />
+              <el-option label="所有" value="dy" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="是否虚拟">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="虚拟" />
-              <el-radio border label="不虚拟" />
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="是否改期">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+          <el-form-item label="配置开关">
+            <span>是否隐藏：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否实名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否虚拟：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否改期：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要关注公众号：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要报名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否退款">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>退款配置</span>
           </el-form-item>
-          <el-form-item label="公众号">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="关注" />
-              <el-radio border label="不关注" />
-            </el-radio-group>
+          <el-form-item label="是否多次入场">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>多次入场配置</span>
+            <el-select placeholder="多次入场模式">
+              <el-option label="下单之后日期" value="group" />
+              <el-option label="在指定区间" value="pt" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="" />
           <el-form-item label="产品">
             <el-checkbox-group v-model="sizeForm.type">
               <el-checkbox-button label="陆地项目" name="type" />
@@ -490,20 +512,7 @@
             <el-col :span="11">
               <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
             </el-col>
-            <!--
-              <el-col class="line" :span="2">-</el-col>
-              <el-col :span="11">
-                <el-time-picker v-model="sizeForm.date2" placeholder="选择时间" style="width: 100%;" />
-              </el-col>-->
           </el-form-item>
-          <!--
-    <el-form-item label="特殊资源">
-      <el-radio-group v-model="sizeForm.resource" size="medium">
-        <el-radio border label="线上品牌商赞助" />
-        <el-radio border label="线下场地免费" />
-      </el-radio-group>
-    </el-form-item>
-	-->
           <el-form-item size="large">
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
             <el-button>取消</el-button>
@@ -512,35 +521,38 @@
       </el-tab-pane>
       <el-tab-pane label="区域产品">
         <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="是否实名">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="实名" />
-              <el-radio border label="不实名" />
-            </el-radio-group>
+          <el-form-item label="线上线下类型">
+            <el-select v-model="sy" placeholder="实名">
+              <el-option label="线上" value="group" />
+              <el-option label="线下" value="pt" />
+              <el-option label="所有" value="dy" />
+            </el-select>
           </el-form-item>
-          <el-form-item label="是否虚拟">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="虚拟" />
-              <el-radio border label="不虚拟" />
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="是否改期">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+          <el-form-item label="配置开关">
+            <span>是否隐藏：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否实名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否虚拟：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否改期：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要关注公众号：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>是否需要报名：</span>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
           </el-form-item>
           <el-form-item label="是否退款">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="可以改期" />
-              <el-radio border label="不可改期" />
-            </el-radio-group>
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>退款配置</span>
           </el-form-item>
-          <el-form-item label="公众号">
-            <el-radio-group v-model="sizeForm.resource" size="medium">
-              <el-radio border label="关注" />
-              <el-radio border label="不关注" />
-            </el-radio-group>
+          <el-form-item label="是否多次入场">
+            <el-switch v-model="validateFlag" active-color="#13ce66" inactive-color="#ff4949" active-value="1" inactive-value="0" />
+            <span>多次入场配置</span>
+            <el-select placeholder="多次入场模式">
+              <el-option label="下单之后日期" value="group" />
+              <el-option label="在指定区间" value="pt" />
+            </el-select>
           </el-form-item>
           <el-form-item label="" />
           <el-form-item label="产品名称">
@@ -618,7 +630,7 @@ export default {
       'sizeForm': '',
       'switchRoles': '',
       'switchRoles2': '',
-      'tabPosition': '英语',
+      'value1price': [],
       'tabs': [],
       'lxqdn': '',
       'validateFlag': '',
@@ -666,6 +678,28 @@ export default {
         'date': '7',
         'name': '7',
         'address': '70'
+      }],
+      options3: [{
+        value: '选项1',
+        label: '儿童票'
+      }, {
+        value: '选项2',
+        label: '学生票'
+      }, {
+        value: '选项3',
+        label: '成人票'
+      }, {
+        value: '选项4',
+        label: '双人成人'
+      }, {
+        value: '选项5',
+        label: '教师票'
+      }, {
+        value: '选项6',
+        label: '军人票'
+      }, {
+        value: '选项7',
+        label: '两大一小票'
       }],
       multipleSelection: []
     }

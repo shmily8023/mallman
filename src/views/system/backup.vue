@@ -6,8 +6,9 @@
           <el-button @click="addData()">立即备份</el-button>
           <div style="display:inline-block; width: 1500px">
             <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
-              <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
+              <el-table-column type="selection" width="180"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
               <el-table-column prop="name" label="备份日期" width="120" />
+              <el-table-column prop="name" label="备份类型:增量/全量" width="150" />
               <el-table-column prop="address" label="文件大小" width="400" show-overflow-tooltip />
               <el-table-column label="操作" width="400" show-overflow-tooltip>
                 <template>

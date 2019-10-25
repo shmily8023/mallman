@@ -1,23 +1,18 @@
 <template>
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
-      <el-tab-pane label="产品分类">
+      <el-tab-pane label="关注">
         <div style="display:inline-block;">
-          <hr>
-          <div style="display:inline-block;">
-            <label class="lxqdn" style="padding-left:0;">产品分类:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdn" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-            <el-button type="primary">查询</el-button>
-            <el-button @click="addData()">增加数据</el-button>
-          </div>
+          <el-button @click="addData()">新增标签</el-button>
           <div style="display:inline-block; width: 1500px">
             <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
               <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
-              <el-table-column prop="address" label="分类名称" width="400" show-overflow-tooltip />
+              <el-table-column prop="name" label="备份日期" width="120" />
+              <el-table-column prop="address" label="文件大小" width="400" show-overflow-tooltip />
               <el-table-column label="操作" width="400" show-overflow-tooltip>
-                <template slot-scope="scope">
-                  <el-button type="primary" @click="dialogFormVisible = true">编辑</el-button>
-                  <el-button type="danger" @click.native="delS(scope.row)">删除</el-button>
+                <template>
+                  <el-button type="primary" @click="dialogFormVisible = true">修改</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -44,25 +39,59 @@
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="产品属性">
+      <el-tab-pane label="未识别">
         <div style="display:inline-block;">
-          <div style="display:inline-block;">
-            <label class="lxqdn" style="padding-left:0;">产品属性:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <el-input v-model="lxqdn" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
-            <el-button type="primary">查询</el-button>
-            <el-button @click="addData()">增加数据</el-button>
-          </div>
-          <br><br>
-          <hr>
+          <el-button @click="addData()">新增分组</el-button>
           <div style="display:inline-block; width: 1500px">
             <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
               <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
-              <el-table-column prop="name" label="签到天数" width="120" />
-              <el-table-column prop="address" label="签到值" width="400" show-overflow-tooltip />
+              <el-table-column prop="name" label="备份日期" width="120" />
+              <el-table-column prop="address" label="文件大小" width="400" show-overflow-tooltip />
               <el-table-column label="操作" width="400" show-overflow-tooltip>
-                <template slot-scope="scope">
-                  <el-button type="primary" @click="dialogFormVisible = true">编辑</el-button>
-                  <el-button type="danger" @click.native="delS(scope.row)">删除</el-button>
+                <template>
+                  <el-button type="primary" @click="dialogFormVisible = true">修改</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-dialog title="编辑签到配置" :visible.sync="dialogFormVisible" @closed="handleClose">
+              <el-form ref="ruleForm" :model="form" :rules="rules">
+                <template>
+                  <el-form-item label="签到天数" :label-width="formLabelWidth" prop="name">
+                    <el-input>(scope.row.date)</el-input>
+                  </el-form-item>
+                  <el-form-item label="签到值" :label-width="formLabelWidth">
+                    <el-input>(scope.row.name)</el-input>
+                  </el-form-item>
+                </template>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="handleSave">确 定</el-button>
+              </div>
+            </el-dialog>
+          </div>
+          <div style="margin-top: 20px">
+            <!--<el-button @click="delMulData()">批量删除</el-button>-->
+            <!--<el-button @click="prints()">打印</el-button>-->
+          </div>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane label="关键词自动回复">
+        <div style="display:inline-block;">
+          <el-input style="width:180px;" placeholder="请输入查询用户" />
+          <el-button @click="addData()">查询</el-button>
+          <div style="display:inline-block; width: 1500px">
+            <el-table ref="multipleTable" :data="tableData3" tooltip-effect="dark" style="" @selection-change="handleSelectionChange">
+              <el-table-column type="selection" width="120"><template slot-scope="scope">{{ scope.row.date }}</template></el-table-column>
+              <el-table-column prop="name" label="备份日期" width="120" />
+              <el-table-column prop="address" label="文件大小" width="400" show-overflow-tooltip />
+              <el-table-column label="操作" width="400" show-overflow-tooltip>
+                <template>
+                  <el-button type="primary" @click="dialogFormVisible = true">拉黑</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">取消拉黑</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">打标签</el-button>
+                  <el-button type="primary" @click="dialogFormVisible = true">打分组</el-button>
                 </template>
               </el-table-column>
             </el-table>

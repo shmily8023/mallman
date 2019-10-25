@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
-      <el-tab-pane label="图片素材2">
+      <el-tab-pane label="图片素材2001">
         <div style="display:inline-block;">
           <label class="radio-label" style="padding-left:0;">网站开关:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <label class="radio-label" style="padding-left:0;">意外险处理。判断抖音 快手环境。接口管理 接口停用</label>

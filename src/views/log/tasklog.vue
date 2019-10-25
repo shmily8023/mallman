@@ -1,13 +1,10 @@
 <template>
   <div class="app-container">
-
     <div>
-      <FilenameOption v-model="filename" />
-      <!--<AutoWidthOption v-model="autoWidth" />-->
-      <!--<BookTypeOption v-model="bookType" />-->
+      <label class="bah" style="padding-left:0;">查询内容:&nbsp;&nbsp;</label>
+      <el-date-picker type="date" placeholder="选择日期" style="width: 15%;" />
+      <el-date-picker type="date" placeholder="选择日期" style="width: 15%;" />
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">导出</el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;"><el-tag type="info">重发短信..</el-tag></a>
     </div>
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
       <!--<el-table-column align="center" label="Id" width="95" style="display:none">
@@ -41,6 +38,16 @@
           {{ scope.row.userPhone }}
         </template>
       </el-table-column>
+      <el-table-column label="执行类名" width="135" align="center">
+        <template>
+          2019-10-16 12:49
+        </template>
+      </el-table-column>
+      <el-table-column label="执行方法名" width="115" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.userPhone }}
+        </template>
+      </el-table-column>
       <el-table-column label="操作[..]" width="115" align="center">
         <template slot-scope="scope">
           {{ scope.row.orderId }}
@@ -49,16 +56,12 @@
     </el-table>
   </div>
 </template>
-
 <script>
 import { fetchList } from '@/api/article'
 import { parseTime } from '@/utils'
 // options components
-import FilenameOption from './components/FilenameOption'
-
 export default {
   name: 'ExportExcel',
-  components: { FilenameOption },
   data() {
     return {
       list: null,

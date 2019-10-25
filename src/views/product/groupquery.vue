@@ -4,13 +4,10 @@
     <div>
       <div style="display:inline-block;">
         <label class="radio-label" style="padding-left:0;">查询内容: </label>
-        <el-input v-model="filename" placeholder="请输入查询内容" style="width:345px;" prefix-icon="el-icon-document" />
+        <el-date-picker type="date" placeholder="选择日期" style="width: 30%;" />
+        <el-date-picker type="date" placeholder="选择日期" style="width: 30%;" />
       </div>
-      <!--<AutoWidthOption v-model="autoWidth" />-->
-      <!--<BookTypeOption v-model="bookType" />-->
       <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="TestGet">查询</el-button>
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">导出</el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;"><el-tag type="info">重发短信..</el-tag></a>
     </div>
     <el-table v-loading="listLoading" :data="list" element-loading-text="拼命加载中" border fit highlight-current-row>
       <!--<el-table-column align="center" label="Id" width="95" style="display:none">

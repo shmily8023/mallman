@@ -1,140 +1,33 @@
 <template>
   <el-card class="box-card" width="100%">
     <el-tabs :before-leave="moreState">
-      <el-tab-pane label="产品预订-消费者">
-        <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="产品类型">
-            <el-select v-model="sizeForm.ptype" placeholder="产品类型">
-              <el-option label="景区" value="group" />
-              <el-option label="酒店" value="pt" />
-              <el-option label="演出" value="dy" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="产品地区">
+      <el-tab-pane label="产品库存管理">
+        <el-form ref="form" :model="sizeForm" label-width="160px" size="mini">
+          <span> 查询非虚拟的产品 ，添加库存</span>
+          <el-form-item label="产品名称">
             <el-cascader placeholder="试试搜索：指南" :options="options2" filterable />
           </el-form-item>
-          <el-form-item label="产品主题">
-            <el-select v-model="sizeForm.ptheme" placeholder="产品主题">
-              <el-option label="城市风光" value="group" />
-              <el-option label="主题乐园" value="pt" />
-              <el-option label="乐游山水" value="dy" />
-              <el-option label="逐海踏浪" value="mt" />
-              <el-option label="爱上古迹" value="cd" />
-              <el-option label="冰雪世界" value="group" />
-              <el-option label="实景演出" value="pt" />
-              <el-option label="文化追根" value="dy" />
-              <el-option label="独家山庄" value="mt" />
-              <el-option label="温泉养生" value="cd" />
-              <el-option label="所有主题" value="cd" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="景区名称">
-            <el-select v-model="sizeForm.pname" placeholder="景区名称">
-              <el-option label="凤凰欢乐大世界" value="jiedai" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="产品名称">
-            <el-checkbox-group v-model="sizeForm.type">
-              <el-checkbox-button label="陆地项目" name="type" />
-              <el-checkbox-button label="水上乐园" name="type" />
-            </el-checkbox-group>
-          </el-form-item>
-          <el-form-item label="数量" style="width: 25%">
+          <el-form-item label="当前库存[各属性]">
             <el-input v-model="sizeForm.name" />
           </el-form-item>
-          <el-form-item label="价格" style="width: 25%">
-            <el-input v-model="sizeForm.name" />
+          <el-form-item label="增加库存">
+            <el-select v-model="value1price" placeholder="请选择">
+              <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value" /></el-select>
           </el-form-item>
-          <el-form-item label="游玩日期" style="width: 35%"><span>几点不可购买？</span>
-            <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
-          </el-form-item>
-          <el-form-item label="购买人">
-            <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择人员" style="width: 35%;" />&nbsp;<span>您还未实名认证,暂时无法购买&nbsp;&nbsp;</span>去实名<span>&nbsp;&nbsp;</span><span>绑定关系</span>
-            <br><br>
-            <el-date-picker v-model="sizeForm.date1" type="date" placeholder="姓名" style="width: 35%;" />
-            <br><br>
-            <el-date-picker v-model="sizeForm.date1" type="date" placeholder="手机号" style="width: 35%;" />
-            <br>
-          </el-form-item>
-          <el-form-item size="large">
-            <el-button type="primary" @click="onSubmit">立即预订</el-button>
-          </el-form-item>
-        </el-form>
-      </el-tab-pane>
-      <el-tab-pane label="产品预订-供应商">
-        <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="" />
-          <el-form-item label="产品">
-            <el-checkbox-group v-model="sizeForm.type">
-              <el-checkbox-button label="陆地项目" name="type" />
-              <el-checkbox-button label="水上乐园" name="type" />
-            </el-checkbox-group>
-          </el-form-item>
-          <el-form-item label="数量">
-            <el-input v-model="sizeForm.name" />
-          </el-form-item>
-          <el-form-item label="价格">
-            <el-input v-model="sizeForm.name" />
-          </el-form-item>
-          <el-form-item label="游玩日期"><span>自动获取当前日期</span>
+          <el-form-item label="增加数量"><span>0</span>
             <el-col :span="11">
               <el-date-picker v-model="sizeForm.date1" type="date" placeholder="选择日期" style="width: 100%;" />
             </el-col>
+            <!--
+      <el-col class="line" :span="2">-</el-col>
+      <el-col :span="11">
+        <el-time-picker v-model="sizeForm.date2" placeholder="选择时间" style="width: 100%;" />
+      </el-col>-->
           </el-form-item>
-          <el-form-item label="购买人">
-            <el-col :span="11">
-              <el-date-picker v-model="sizeForm.date1" type="date" placeholder="姓名" style="width: 100%;" />
-            </el-col>
-            <br>
-            <el-col :span="11">
-              <el-date-picker v-model="sizeForm.date1" type="date" placeholder="手机号" style="width: 100%;" />
-            </el-col>
-            <el-col :span="11">
-              <el-date-picker v-model="sizeForm.date1" type="date" placeholder="身份证号" style="width: 100%;" />
-            </el-col>
-          </el-form-item>
+
           <el-form-item size="large">
-            <el-button type="primary" @click="onSubmit">立即预订</el-button>
-          </el-form-item>
-        </el-form>
-      </el-tab-pane>
-      <el-tab-pane label="产品预订-零食售卖">
-        <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
-          <el-form-item label="" />
-          <el-form-item label="产品名称">
-            <el-select v-model="sizeForm.sy" placeholder="产品名称">
-              <el-option label="哇哈哈纯净水" value="group" />
-              <el-option label="红牛" value="pt" />
-              <el-option label="导游" value="dy" />
-              <el-option label="媒体" value="mt" />
-              <el-option label="踩点" value="cd" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="产品价格">
-            <el-input v-model="sizeForm.name" value="2" />
-          </el-form-item>
-          <el-form-item label="产品单位">
-            <el-select v-model="sizeForm.sy" placeholder="产品单位">
-              <el-option label="件" value="group" />
-              <el-option label="份" value="pt" />
-              <el-option label="桶" value="dy" />
-              <el-option label="箱" value="mt" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="产品数量">
-            <el-select v-model="sizeForm.sy" placeholder="产品数量">
-              <el-option label="1" value="group" />
-              <el-option label="2" value="pt" />
-              <el-option label="3" value="dy" />
-              <el-option label="4" value="mt" />
-              <el-option label="5" value="cd" />
-            </el-select>
-          </el-form-item>
-          <el-form-item label="产品总价格">
-            <el-input v-model="sizeForm.name" />
-          </el-form-item>
-          <el-form-item size="large">
-            <el-button type="primary" @click="onSubmit">立即预订</el-button>
+            <el-button type="primary" @click="onSubmit">立即创建</el-button>
+            <el-button>取消</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -165,8 +58,12 @@ export default {
         ]
       },
       'sizeForm': '',
+      'switchRoles': '',
+      'switchRoles2': '',
+      'value1price': [],
       'tabs': [],
       'lxqdn': '',
+      'validateFlag': '',
       'lxqdv': '',
       'webname': '',
       'sitecontent': '11111',
@@ -212,41 +109,27 @@ export default {
         'name': '7',
         'address': '70'
       }],
-      'tableData4': [{
-        'rowNum': 1,
-        'date': '1',
-        'name': '1',
-        'address': '10'
+      options3: [{
+        value: '选项1',
+        label: '儿童票'
       }, {
-        'rowNum': 2,
-        'date': '2',
-        'name': '2',
-        'address': '20'
+        value: '选项2',
+        label: '学生票'
       }, {
-        'rowNum': 3,
-        'date': '3',
-        'name': '3',
-        'address': '30'
+        value: '选项3',
+        label: '成人票'
       }, {
-        'rowNum': 4,
-        'date': '4',
-        'name': '4',
-        'address': '40'
+        value: '选项4',
+        label: '双人成人'
       }, {
-        'rowNum': 5,
-        'date': '5',
-        'name': '5',
-        'address': '50'
+        value: '选项5',
+        label: '教师票'
       }, {
-        'rowNum': 6,
-        'date': '6',
-        'name': '6',
-        'address': '60'
+        value: '选项6',
+        label: '军人票'
       }, {
-        'rowNum': 7,
-        'date': '7',
-        'name': '7',
-        'address': '70'
+        value: '选项7',
+        label: '两大一小票'
       }],
       options2: [{
         value: 'zhinan',

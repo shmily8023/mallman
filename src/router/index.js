@@ -248,17 +248,26 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/permission3',
+    path: '/product',
     component: Layout,
     redirect: '/permission/page',
     alwaysShow: true, // will always show the root menu
-    name: 'Permission3',
+    name: 'product',
     meta: {
       title: '产品管理',
       icon: 'lock',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
+      {
+        path: 'productsearch',
+        component: () => import('@/views/product/query'),
+        name: 'productsearch',
+        meta: {
+          title: '产品查询',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
       {
         path: 'productsadd2',
         component: () => import('@/views/product/order-buy'),
@@ -270,7 +279,7 @@ export const asyncRoutes = [
       },
       {
         path: 'productadd',
-        component: () => import('@/views/product/test'),
+        component: () => import('@/views/product/product-add'),
         name: 'RolePermission',
         meta: {
           title: '产品添加',
@@ -278,11 +287,20 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'productcomment',
-        component: () => import('@/views/product/test'),
+        path: 'product-add-stock',
+        component: () => import('@/views/product/product-stock-add'),
         name: 'RolePermission',
         meta: {
-          title: '产品评论管理',
+          title: '产品库存',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'productcomment',
+        component: () => import('@/views/product/product-add'),
+        name: 'RolePermission',
+        meta: {
+          title: '产品评论',
           roles: ['admin']
         }
       },
@@ -291,16 +309,7 @@ export const asyncRoutes = [
         component: () => import('@/views/product/productcatalog'),
         name: 'RolePermission',
         meta: {
-          title: '产品分类/属性 管理',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'productsearch',
-        component: () => import('@/views/product/query'),
-        name: 'RolePermission',
-        meta: {
-          title: '产品查询[部分完成]',
+          title: '产品分类/属性',
           roles: ['admin']
         }
       },
@@ -316,11 +325,11 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/permission4',
+    path: '/group',
     component: Layout,
     redirect: '/permission/page',
     alwaysShow: true, // will always show the root menu
-    name: 'Permission4',
+    name: 'group',
     meta: {
       title: '团队管理',
       icon: 'lock',
@@ -329,7 +338,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'groupapply',
-        component: () => import('@/views/other/group'),
+        component: () => import('@/views/product/group'),
         name: 'PagePermission',
         meta: {
           title: '申请团队',
@@ -338,7 +347,7 @@ export const asyncRoutes = [
       },
       {
         path: 'groupquery',
-        component: () => import('@/views/other/groupquery'),
+        component: () => import('@/views/product/groupquery'),
         name: 'DirectivePermission',
         meta: {
           title: '团队查询[消费者]'
@@ -347,7 +356,7 @@ export const asyncRoutes = [
       },
       {
         path: 'groupselect',
-        component: () => import('@/views/other/groupquery2'),
+        component: () => import('@/views/product/groupquery2'),
         name: 'DirectivePermission',
         meta: {
           title: '团队查询[供应商]'
@@ -382,7 +391,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/cashlog'),
         name: 'DirectivePermission',
         meta: {
-          title: '提现日志[初步完成]'
+          title: '提现日志'
           // if do not set roles, means: this page does not require permission
         }
       },
@@ -391,7 +400,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/deallog'),
         name: 'RolePermission',
         meta: {
-          title: '交易日志[初步完成]',
+          title: '交易日志',
           roles: ['admin']
         }
       },
@@ -400,7 +409,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/apilog'),
         name: 'RolePermission',
         meta: {
-          title: '接口操作记录[初步完成]',
+          title: '接口操作记录',
           roles: ['admin']
         }
       },
@@ -409,7 +418,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/syslog'),
         name: 'RolePermission',
         meta: {
-          title: '系统日志[初步完成]',
+          title: '系统日志',
           roles: ['admin']
         }
       },
@@ -418,7 +427,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/refundlog'),
         name: 'RolePermission',
         meta: {
-          title: '退款日志[初步完成]',
+          title: '退款日志',
           roles: ['admin']
         }
       },
@@ -427,7 +436,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/verifylog'),
         name: 'RolePermission',
         meta: {
-          title: '验证日志[初步完成]',
+          title: '验证日志',
           roles: ['admin']
         }
       },
@@ -436,7 +445,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/expresslog'),
         name: 'RolePermission',
         meta: {
-          title: '快递记录[初步完成]',
+          title: '快递记录',
           roles: ['admin']
         }
       },
@@ -445,7 +454,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/sendlog'),
         name: 'RolePermission',
         meta: {
-          title: '发送记录',
+          title: '发送记录[未完成]',
           roles: ['admin']
         }
       },
@@ -454,7 +463,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/logs'),
         name: 'RolePermission',
         meta: {
-          title: '积分零钱记录[初步完成]',
+          title: '积分零钱记录',
           roles: ['admin']
         }
       },
@@ -463,7 +472,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/reorderlog'),
         name: 'RolePermission',
         meta: {
-          title: '订单撤改记录[部分完成]',
+          title: '订单撤改记录',
           roles: ['admin']
         }
       },
@@ -472,7 +481,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/simchargelog'),
         name: 'RolePermission',
         meta: {
-          title: 'SIM充值记录[初步完成]',
+          title: 'SIM充值记录',
           roles: ['admin']
         }
       },
@@ -481,7 +490,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/tasklog'),
         name: 'RolePermission',
         meta: {
-          title: '计划任务记录[初步完成]',
+          title: '计划任务记录',
           roles: ['admin']
         }
       },
@@ -490,7 +499,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/adlog'),
         name: 'RolePermission',
         meta: {
-          title: '广告记录[初步完成]',
+          title: '广告记录',
           roles: ['admin']
         }
       },
@@ -499,7 +508,7 @@ export const asyncRoutes = [
         component: () => import('@/views/log/wxlog'),
         name: 'RolePermission',
         meta: {
-          title: '微信操作记录',
+          title: '微信操作记录[未完成]',
           roles: ['admin']
         }
       }
